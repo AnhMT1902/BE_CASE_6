@@ -4,6 +4,7 @@ import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 export class Company {
     @PrimaryGeneratedColumn()
     public readonly companyId: number;
+
     @Column({type: "varchar"})
     public name: string;
     @Column({type: "varchar"})
