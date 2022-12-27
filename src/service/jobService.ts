@@ -1,5 +1,6 @@
 import {AppDataSource} from "../data-source";
 import {Job} from "../model/job";
+import {validate} from "class-validator";
 
 
 export class JobService {
@@ -13,34 +14,47 @@ export class JobService {
         let job = await this.jobRepository.find()
         return job
     }
-    add = async (data) => {
+    addJob = async (data) => {
         let job = await this.jobRepository.save(data)
         return job
     }
-    edit = async (id, data) => {
+    editJob = async (id, data) => {
         let query = `UPDATE job
-                       SET companyId   = ${data.companyId},
-                           title       = '${data.title}',
-                           wageStart   ='${data.wageStart}',
-                           wageEnd     ='${data.wageEnd}',
-                           addressWork ='${data.addressWork}',
-                           vacancies   ='${data.vacancies}',
-                           experience  ='${data.experience}',
-                           status      =${data.status},
-                           endDate     ='${data.endDate}',
-                           description ='${data.description}',
-                           codeJob='${data.codeJob}'
-                       WHERE jobId = ${id}`;
+                     SET companyId   = ${data.companyId},
+                         title       = '${data.title}',
+                         wageStart   ='${data.wageStart}',
+                         wageEnd     ='${data.wageEnd}',
+                         addressWork ='${data.addressWork}',
+                         vacancies   ='${data.vacancies}',
+                         experience  ='${data.experience}',
+                         status      =${data.status},
+                         endDate     ='${data.endDate}',
+                         description ='${data.description}',
+                         codeJob='${data.codeJob}'
+                     WHERE jobId = ${id}`;
         await this.jobRepository.query(query)
 
     }
-    delete = async (id) => {
-       let query = `delete from job where jobId =` + id
+    deleteJob = async (id) => {
+        let query = `delete
+                     from job
+                     where jobId =` + id
         await this.jobRepository.query(query)
     }
-    search = async (job) => {
-        let query = `select * from job where title like '%${job.title}%'`
-        await this.jobRepository.query(query)
+    searchJob = async (job) => {
+        let query = `select *
+                     from job
+                     where title like '%${job.title}%'`
+        let jobs = await this.jobRepository.query(query)
+        return jobs
     }
+    searchAddress = async (job) =>{
+        let query = `select *
+                     from job
+                     where addressWork like '%${job.addressWork}%'`
+        let address = await this.jobRepository.query(query)
+        return address
+    }
+
 }
 

@@ -1,5 +1,11 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {
 
+    Length,
+
+    IsDate,
+
+} from "class-validator"
 @Entity()
 export class Job {
     @PrimaryGeneratedColumn()
@@ -7,6 +13,7 @@ export class Job {
     @Column({type: "int"})
     public companyId: number;
     @Column({type: "varchar"})
+    @Length(10, 20)
     public title: string;
     @Column({type: "varchar"})
     public wageStart: string;
@@ -22,6 +29,8 @@ export class Job {
     public status: string;// full time, part time
     @Column({type: "date"})
     public endDate: Date;
+    @IsDate()
+    createDate: Date
     @Column({type: "text"})
     public description: string;
     @Column({type: "text"})
