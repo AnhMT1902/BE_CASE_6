@@ -1,12 +1,12 @@
 {
-  "name": "demo_mg",
+  "name": "BE_CASE_6",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/.bin/rimraf dist && tsc -p tsconfig.build.json",
-    "start:dev": "node_modules/.bin/tsc-watch -p tsconfig.build.json --onSuccess \"node dist/index.js\""
+    "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/index.js\""
   },
   "author": "",
   "license": "ISC",

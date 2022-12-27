@@ -993,376 +993,120 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="287" parent="1" name="utf8mb4_zh_0900_as_cs">
       <Charset>utf8mb4</Charset>
     </collation>
-    <schema id="288" parent="1" name="bai_tap">
+    <schema id="288" parent="1" name="aiyeu_anh1">
       <Current>1</Current>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="289" parent="1" name="blogs">
+    <schema id="289" parent="1" name="aiyeuanh">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="290" parent="1" name="bt1_csdl">
+    <schema id="290" parent="1" name="bai tap">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="291" parent="1" name="city">
+    <schema id="291" parent="1" name="baitap">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="292" parent="1" name="dbtest">
+    <schema id="292" parent="1" name="blog">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="293" parent="1" name="demo2006">
+    <schema id="293" parent="1" name="blogcase">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="294" parent="1" name="demo_database">
+    <schema id="294" parent="1" name="database_case">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="295" parent="1" name="find_job">
+    <schema id="295" parent="1" name="demo">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="296" parent="1" name="homestay">
+    <schema id="296" parent="1" name="demo2006">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="297" parent="1" name="information_schema">
+    <schema id="297" parent="1" name="demo_database">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="298" parent="1" name="demo_module">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="299" parent="1" name="diem">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="300" parent="1" name="giaovien">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="301" parent="1" name="iloveyou_chichchich1">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <schema id="302" parent="1" name="information_schema">
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
-    <schema id="298" parent="1" name="king">
+    <schema id="303" parent="1" name="job">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="299" parent="1" name="my_database">
+    <schema id="304" parent="1" name="king">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="300" parent="1" name="my_database1">
+    <schema id="305" parent="1" name="manager">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="301" parent="1" name="mysql">
+    <schema id="306" parent="1" name="module3_case">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="302" parent="1" name="performance_schema">
+    <schema id="307" parent="1" name="module4">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="303" parent="1" name="product">
+    <schema id="308" parent="1" name="mysql">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="304" parent="1" name="quanlydiemthi">
+    <schema id="309" parent="1" name="new_schema">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="305" parent="1" name="quanlynhansu">
+    <schema id="310" parent="1" name="nhuanhbede">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="306" parent="1" name="quanlysanpham">
+    <schema id="311" parent="1" name="performance_schema">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="307" parent="1" name="quanlysinhvien">
+    <schema id="312" parent="1" name="quanlydiem">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="308" parent="1" name="sakila">
+    <schema id="313" parent="1" name="quanlykhachhang">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="309" parent="1" name="sys">
+    <schema id="314" parent="1" name="quanlysinhvien">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="310" parent="1" name="world">
+    <schema id="315" parent="1" name="schema_name">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="311" parent="1" name="yourqueen">
+    <schema id="316" parent="1" name="schema_name1">
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <user id="312" parent="1" name="mysql.infoschema">
+    <schema id="317" parent="1" name="sys">
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </schema>
+    <user id="318" parent="1" name="diem">
+      <Plugin>caching_sha2_password</Plugin>
+    </user>
+    <user id="319" parent="1" name="mysql.infoschema">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="313" parent="1" name="mysql.session">
+    <user id="320" parent="1" name="mysql.session">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="314" parent="1" name="mysql.sys">
+    <user id="321" parent="1" name="mysql.sys">
       <CanLogin>0</CanLogin>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <user id="315" parent="1" name="root">
+    <user id="322" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="316" parent="295" name="category">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="317" parent="295" name="company">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="318" parent="295" name="cv">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="319" parent="295" name="cv_job">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="320" parent="295" name="job">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="321" parent="295" name="job_category">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="322" parent="295" name="user">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <table id="323" parent="295" name="user_company">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <column id="324" parent="316" name="categoryId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="325" parent="316" name="name">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <index id="326" parent="316" name="PRIMARY">
-      <ColNames>categoryId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="327" parent="316" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="328" parent="317" name="companyId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="329" parent="317" name="name">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="330" parent="317" name="email">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="331" parent="317" name="description">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <column id="332" parent="317" name="image">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-    </column>
-    <column id="333" parent="317" name="address">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>6</Position>
-    </column>
-    <column id="334" parent="317" name="numberStaff">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>7</Position>
-    </column>
-    <column id="335" parent="317" name="linkMap">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>8</Position>
-    </column>
-    <index id="336" parent="317" name="PRIMARY">
-      <ColNames>companyId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="337" parent="317" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="338" parent="318" name="cvId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="339" parent="318" name="image">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <index id="340" parent="318" name="PRIMARY">
-      <ColNames>cvId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="341" parent="318" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="342" parent="319" name="cv_jobId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="343" parent="319" name="cvId">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="344" parent="319" name="jobId">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <index id="345" parent="319" name="PRIMARY">
-      <ColNames>cv_jobId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="346" parent="319" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="347" parent="320" name="jobId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="348" parent="320" name="title">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="349" parent="320" name="numberOfPositions">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="350" parent="320" name="level">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <column id="351" parent="320" name="experience">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-    </column>
-    <column id="352" parent="320" name="endDate">
-      <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>6</Position>
-    </column>
-    <index id="353" parent="320" name="PRIMARY">
-      <ColNames>jobId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="354" parent="320" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="355" parent="321" name="job_categoryId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="356" parent="321" name="jobId">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="357" parent="321" name="categoryId">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <index id="358" parent="321" name="PRIMARY">
-      <ColNames>job_categoryId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="359" parent="321" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="360" parent="322" name="username">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="361" parent="322" name="password">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="362" parent="322" name="userId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="363" parent="322" name="email">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <column id="364" parent="322" name="phone">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>5</Position>
-    </column>
-    <index id="365" parent="322" name="PRIMARY">
-      <ColNames>userId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="366" parent="322" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="367" parent="323" name="user_companyId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="368" parent="323" name="userId">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="369" parent="323" name="companyId">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <index id="370" parent="323" name="PRIMARY">
-      <ColNames>user_companyId</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="371" parent="323" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
+    <user id="323" parent="1" name="user_name">
+      <Plugin>caching_sha2_password</Plugin>
+    </user>
   </database-model>
 </dataSource>
