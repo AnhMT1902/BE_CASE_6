@@ -1,0 +1,17 @@
+import {Request, Response} from "express";
+import CompanyService from "../service/companyService";
+
+class CompanyController {
+    loginCompany = async (req: Request, res: Response) => {
+        let company = req.body
+        let companyFind = await CompanyService.loginCompany(company)
+        return res.status(200).json(companyFind)
+    }
+    registerCompany = async (req: Request, res: Response) => {
+        let company = req.body
+        await CompanyService.registerCompany(company)
+    }
+
+}
+
+export default new CompanyController();
