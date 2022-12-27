@@ -1,6 +1,7 @@
 import {AppDataSource} from "../data-source";
 import {Company} from "../model/company";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt"
+import jwt from 'jsonwebtoken'
 
 class CompanyService {
     private companyRepository: any
@@ -9,20 +10,55 @@ class CompanyService {
         this.companyRepository = AppDataSource.getRepository(Company)
     }
 
-    loginCompany = (company) => {
-        return company
+    loginCompany = async (company) => {
+        let userFind = await this.findCompanyByEmail(company.email);
+        if (userFind.length === 0) {
+            return {
+                message: "Incorrect login information"
+            }
+        } else {
+            let comparePassword = await bcrypt.compare(company.password, userFind.password, (err, resolve) => {
+                if (err) {
+                    console.log(err)
+                } else console.log(resolve)
+            })
+            console.log(comparePassword)
+            if (!comparePassword) {
+                return {
+                    message: "Incorrect login information"
+                }
+            } else {
+                let payload = {
+                    id: userFind.id,
+                    email: userFind.email
+                }
+                let secret = 'job';
+                let token = jwt.sign(payload, secret, {
+                    expiresIn: 36000
+                })
+                return {
+                    token: token,
+                    company: payload
+                }
+            }
+        }
     }
-    registerCompany = async (company) => {
+
+    findCompanyByEmail = async (email) => {
         let sql = `select *
-                   from user
-                   where email = '${company.email}'`
-        let companyFind = await this.companyRepository.query(sql)
+                   from company
+                   where email = '${email}'`
+        return await this.companyRepository.query(sql);
+    }
+
+    registerCompany = async (company) => {
+        let companyFind = await this.findCompanyByEmail(company.email)
         if (companyFind.length !== 0) {
             return {
                 message: "email has been used"
             }
         } else {
-            company.password = await bcrypt.hash(company.password, 10)
+            company.password = await bcrypt.hash(company.password, 10);
             return this.companyRepository.save(company)
         }
     }
