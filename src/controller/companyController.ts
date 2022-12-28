@@ -19,6 +19,7 @@ class CompanyController {
         let company: Company = req.body
         company.password = '12345678'
         let companyFind = await CompanyService.registerCompany(company);
+        console.log(companyFind)
         return res.status(200).json(companyFind)
     }
     updateCompany = async (req: Request, res: Response) => {
