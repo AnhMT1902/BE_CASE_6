@@ -2,7 +2,6 @@ import {AppDataSource} from "../data-source";
 import {Job} from "../model/job";
 import {validate} from "class-validator";
 
-
 export class JobService {
     private jobRepository: any
 
@@ -15,8 +14,27 @@ export class JobService {
         return job
     }
     addJob = async (data) => {
-        let job = await this.jobRepository.save(data)
-        return job
+        let dataValidator = new Job()
+        dataValidator.title =data.title
+        dataValidator.wageStart =data.wageStart
+        dataValidator.wageEnd  =data.wageEnd
+        dataValidator.addressWork =data.addressWork
+        dataValidator.vacancies =data.vacancies
+        dataValidator.experience  =data.experience
+        dataValidator.status =data.status
+        dataValidator.endDate =data.endDate
+        dataValidator.description =data.description
+        return await validate(dataValidator).then( async (error)=>{
+            if (error.length > 0) {
+                return {
+                    message: "add error"
+                }
+            } else {
+                let job = await this.jobRepository.save(data)
+                return job
+            }
+        })
+
     }
     editJob = async (id, data) => {
         let query = `UPDATE job
@@ -30,10 +48,9 @@ export class JobService {
                          status      =${data.status},
                          endDate     ='${data.endDate}',
                          description ='${data.description}',
-                         codeJob='${data.codeJob}'
+                         codeJob ='${data.codeJob}'
                      WHERE jobId = ${id}`;
-        await this.jobRepository.query(query)
-
+      return await this.jobRepository.query(query)
     }
     deleteJob = async (id) => {
         let query = `delete
@@ -48,13 +65,12 @@ export class JobService {
         let jobs = await this.jobRepository.query(query)
         return jobs
     }
-    searchAddress = async (job) =>{
+    searchAddress = async (job) => {
         let query = `select *
                      from job
                      where addressWork like '%${job.addressWork}%'`
         let address = await this.jobRepository.query(query)
         return address
     }
-
 }
 
