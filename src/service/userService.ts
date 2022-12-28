@@ -32,7 +32,7 @@ class UserService {
                 })
                 return {
                     token: token,
-                    company: userFind[0]
+                    user: userFind[0]
                 }
             }
         }

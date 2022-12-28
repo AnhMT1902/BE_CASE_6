@@ -29,8 +29,8 @@ class UserController {
             port: 587,
             secure: false,
             auth: {
-                user: 'cskh@ieltsmentor.edu.vn', //Tài khoản gmail vừa tạo
-                pass: 'Ieltsmentor@123' //Mật khẩu tài khoản gmail vừa tạo
+                user: 'find.jobc07@gmail.com', //Tài khoản gmail vừa tạo
+                pass: 'utrmdjfrigniottr' //Mật khẩu tài khoản gmail vừa tạo
             }
         });
         let mainOptions = { // thiết lập đối tượng, nội dung gửi mail
