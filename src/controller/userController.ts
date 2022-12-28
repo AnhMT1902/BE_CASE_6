@@ -1,6 +1,4 @@
 import {Request, Response} from "express";
-import {Company} from "../model/company";
-import CompanyService from "../service/companyService";
 import userService from "../service/userService";
 
 class UserController {
@@ -14,9 +12,13 @@ class UserController {
         }
     }
     loginUser = async (req: Request, res: Response) => {
-        let user = req.body
-        let userFind = await userService.loginUser(user)
-        return res.status(200).json(userFind)
+        try {
+            let user = req.body
+            let userFind = await userService.loginUser(user)
+            return res.status(200).json(userFind)
+        } catch (e) {
+            console.log(e.message)
+        }
     }
 }
 
