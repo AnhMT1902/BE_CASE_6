@@ -29,8 +29,8 @@ class CompanyService {
                 }
             } else {
                 let payload = {
-                    id: userFind.id,
-                    email: userFind.email
+                    id: userFind[0].id,
+                    email: userFind[0].email
                 }
                 let secret = 'job';
                 let token = jwt.sign(payload, secret, {
@@ -55,11 +55,16 @@ class CompanyService {
         let companyFind = await this.findCompanyByEmail(company.email)
         if (companyFind.length !== 0) {
             return {
-                message: "email has been used"
+                message: "email has been used",
+                checkRegister: false
             }
         } else {
             company.password = await bcrypt.hash(company.password, 10);
-            return this.companyRepository.save(company)
+            await this.companyRepository.save(company)
+            return {
+                message: "email success",
+                checkRegister: true
+            }
         }
     }
 }
