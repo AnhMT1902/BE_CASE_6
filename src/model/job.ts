@@ -9,14 +9,15 @@ export class Job {
     public companyId: number;
     @IsNotEmpty()
     @Column({type: "varchar"})
+    @IsNotEmpty()
     public title: string;
     @Column({type: "varchar"})
     public wageStart: string;
-    @Column({type: "varchar"})
-    public wageEnd: string;
-    @Column({type: "varchar"})
-    public addressWork: string;
     @Column({type: "int"})
+    public wageEnd: string;
+    @Column({type: "int"})
+    public addressWork: string;
+    @Column({type: "varchar"})//vị trí tuyển dụng
     public vacancies: string;
     @Column({type: "varchar"})
     public experience: string;

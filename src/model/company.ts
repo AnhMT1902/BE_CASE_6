@@ -1,28 +1,60 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {CompanyDto} from "../dto/companyDto";
+import {IsEmail, IsNotEmpty, Max, MAX, Min} from "class-validator";
 
 @Entity()
-export class Company {
+export class Company extends CompanyDto {
     @PrimaryGeneratedColumn()
     public readonly companyId: number;
-
-    @Column({type: "varchar"})
+    @Column({
+        nullable: true, type: "varchar"
+    })
     public name: string;
-    @Column({type: "varchar"})
+    @Column({
+        nullable: true, type: "varchar"
+    })
+    @IsNotEmpty()
+    @IsEmail()
     public email: string;
-    @Column({type: "varchar"})
+    @Column({
+        nullable: true, type: "varchar"
+    })
+    @IsNotEmpty()
     public password: string;
-    @Column({type: "text"})
+    @Column({
+        nullable: true, type: "text"
+    })
     public image: string;
-    @Column({type: "text"})
+    @Column({
+        nullable: true, type: "text"
+    })
+    public description: string;
+    @Column({
+        nullable: true, type: "text"
+    })
     public address: string;
-    @Column({type: "int"})
+    @Column({
+        nullable: true, type: "int"
+    })
     public numberStaff: number;
-    @Column({type: "text"})
+    @Column({
+        nullable: true, type: "text"
+    })
     public linkMap: string;
-    @Column({type: 'varchar'})
+    @Column({
+        nullable: true, type: 'varchar'
+    })
     public companyCode: string // 3 chữ cái đầu tên viết tắt của doanh nghiệp + id daonh nghiệp _ 3 số bất kỳ
-    @Column({type: 'varchar'})
+    @Column({
+        nullable: true, type: 'varchar'
+    })
     public abbreviatedName: string;
-    @Column({type: 'varchar'})
+    @Column({
+        nullable: true, type: 'varchar'
+    })
     public phoneNumber: string;
+    @Column({
+        nullable: true, type: 'varchar'
+    })
+    public website: string;
 }
