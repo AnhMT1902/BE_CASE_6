@@ -12,7 +12,6 @@ class JobController {
         try {
             let job = await this.jobService.findAll()
             return res.status(200).json(job)
-
         } catch (e) {
             res.json({
                 mess: e.message
