@@ -11,26 +11,21 @@ class CompanyService {
     }
 
     loginCompany = async (company) => {
-        let userFind = await this.findCompanyByEmail(company.email);
-        if (userFind.length === 0) {
+        let companyFind = (await this.findCompanyByEmail(company.email));
+        if (companyFind.length === 0) {
             return {
                 message: "Incorrect login information"
             }
         } else {
-            let comparePassword = await bcrypt.compare(company.password, userFind.password, (err, resolve) => {
-                if (err) {
-                    console.log(err)
-                } else console.log(resolve)
-            })
-            console.log(comparePassword)
+            let comparePassword = await bcrypt.compare(company.password, companyFind[0].password)
             if (!comparePassword) {
                 return {
                     message: "Incorrect login information"
                 }
             } else {
                 let payload = {
-                    id: userFind.id,
-                    email: userFind.email
+                    id: companyFind[0].companyId,
+                    email: companyFind[0].email
                 }
                 let secret = 'job';
                 let token = jwt.sign(payload, secret, {
@@ -38,7 +33,7 @@ class CompanyService {
                 })
                 return {
                     token: token,
-                    company: payload
+                    company: companyFind[0]
                 }
             }
         }
@@ -55,13 +50,20 @@ class CompanyService {
         let companyFind = await this.findCompanyByEmail(company.email)
         if (companyFind.length !== 0) {
             return {
-                message: "email has been used"
+                message: "email has been used", checkRegister: false
             }
         } else {
             company.password = await bcrypt.hash(company.password, 10);
-            return this.companyRepository.save(company)
+            await this.companyRepository.save(company)
+            return {
+                message: "register success", checkRegister: true
+            }
         }
     }
+    updateCompany = (company) => {
+        return this.companyRepository.update({companyId: company.companyId}, company)
+    }
+
 }
 
 export default new CompanyService();

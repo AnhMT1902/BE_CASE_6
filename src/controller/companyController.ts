@@ -4,15 +4,28 @@ import {Company} from "../model/company";
 import {validate} from "class-validator";
 
 class CompanyController {
+
     loginCompany = async (req: Request, res: Response) => {
-        let company: Company = req.body
-        let companyFind = await CompanyService.loginCompany(company);
-        return res.status(200).json(companyFind)
+        try {
+            let company = req.body
+
+            let companyFind = await CompanyService.loginCompany(company);
+            return res.status(200).json(companyFind)
+        } catch (e) {
+            console.log(e.message)
+        }
+
     }
     registerCompany = async (req: Request, res: Response) => {
         let company: Company = req.body
         company.password = '12345678'
         let companyFind = await CompanyService.registerCompany(company);
+        return res.status(200).json(companyFind)
+    }
+    updateCompany = async (req: Request, res: Response) => {
+        let companyEdit = req.body
+        companyEdit.companyId = +req.params.companyId
+        let companyFind = await CompanyService.updateCompany(companyEdit);
         return res.status(200).json(companyFind)
     }
 }
