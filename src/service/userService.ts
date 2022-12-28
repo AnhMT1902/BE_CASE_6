@@ -14,13 +14,17 @@ class UserService {
         let userFind = (await this.findUserByEmail(user.email));
         if (userFind.length === 0) {
             return {
-                message: "Incorrect login information"
+                message: "Incorrect login information",
+                checkLogin: false
+
             }
         } else {
             let comparePassword = await bcrypt.compare(user.password, userFind[0].password)
             if (!comparePassword) {
                 return {
-                    message: "Incorrect login information"
+                    message: "Password wrong!!!",
+                    checkLogin: false
+
                 }
             } else {
                 let payload = {
