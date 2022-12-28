@@ -47,7 +47,6 @@ class UserService {
 
     registerUser = async (user) => {
         let userFind = await this.findUserByEmail(user.email)
-        console.log(user)
         if (userFind.length !== 0) {
             return {
                 message: "email has been used",
