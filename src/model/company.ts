@@ -1,5 +1,6 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 import {CompanyDto} from "../dto/companyDto";
+import {IsEmail, IsNotEmpty, Max, MAX, Min} from "class-validator";
 
 @Entity()
 export class Company extends CompanyDto {
@@ -12,15 +13,22 @@ export class Company extends CompanyDto {
     @Column({
         nullable: true, type: "varchar"
     })
+    @IsNotEmpty()
+    @IsEmail()
     public email: string;
     @Column({
         nullable: true, type: "varchar"
     })
+    @IsNotEmpty()
     public password: string;
     @Column({
         nullable: true, type: "text"
     })
     public image: string;
+    @Column({
+        nullable: true, type: "text"
+    })
+    public description: string;
     @Column({
         nullable: true, type: "text"
     })
@@ -45,4 +53,8 @@ export class Company extends CompanyDto {
         nullable: true, type: 'varchar'
     })
     public phoneNumber: string;
+    @Column({
+        nullable: true, type: 'varchar'
+    })
+    public website: string;
 }
