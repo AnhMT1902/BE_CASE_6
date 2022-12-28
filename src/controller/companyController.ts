@@ -8,7 +8,6 @@ class CompanyController {
     loginCompany = async (req: Request, res: Response) => {
         try {
             let company = req.body
-
             let companyFind = await CompanyService.loginCompany(company);
             return res.status(200).json(companyFind)
         } catch (e) {

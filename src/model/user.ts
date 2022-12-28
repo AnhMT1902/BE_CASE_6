@@ -5,7 +5,7 @@ export class User {
     @PrimaryGeneratedColumn()
     public readonly userId: number;
     @Column({type: 'varchar'})
-    public username: string;
+    public name: string;
     @Column({type: 'varchar'})
     public password: string;
     @Column({type: 'varchar'})
