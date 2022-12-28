@@ -62,7 +62,7 @@ class CompanyService {
         return await validate(companyRegister).then(async (errors) => {
             if (errors.length > 0) {
                 return {
-                    message : 'validation failed. errors: ', errors
+                    message : 'validation failed. errors:'
                 }
             } else {
                 console.log('validation succeed');
