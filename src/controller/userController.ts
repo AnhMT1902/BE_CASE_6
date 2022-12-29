@@ -5,13 +5,14 @@ import nodemailer from "nodemailer"
 class UserController {
     registerUser = async (req: Request, res: Response) => {
         try {
-            let user = req.body
-            console.log(user)
+            let user = req.body;
             let userFind = await userService.registerUser(user);
-            await this.sendMailForUser(req, res, user.email)
-            return res.status(200).json(userFind)
+            await this.sendMailForUser(req, res, user.email);
+            return res.status(200).json(userFind);
         } catch (e) {
-            console.log(e.message)
+            res.json({
+                mess: e.message
+            })
         }
     }
     loginUser = async (req: Request, res: Response) => {
@@ -20,7 +21,9 @@ class UserController {
             let userFind = await userService.loginUser(user)
             return res.status(200).json(userFind)
         } catch (e) {
-            console.log(e.message)
+            res.json({
+                mess: e.message
+            })
         }
     }
     sendMailForUser = async (req, res, email) => {
@@ -42,9 +45,9 @@ class UserController {
         }
         await transporter.sendMail(mainOptions, function (err, info) {
             if (err) {
-                console.log(`mess, Lỗi gửi mail:  + ${err}`)
+                return `mess, Lỗi gửi mail:  + ${err}`
             } else {
-                console.log('Message sent: ' + info.response)
+                return 'Message sent: ' + info.response
             }
         });
     }

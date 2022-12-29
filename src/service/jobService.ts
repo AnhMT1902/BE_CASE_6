@@ -10,8 +10,7 @@ export class JobService {
     }
 
     findAll = async () => {
-        let job = await this.jobRepository.find()
-        return job
+        return await this.jobRepository.find()
     }
     addJob = async (data) => {
         let dataValidator = new Job()
@@ -30,27 +29,13 @@ export class JobService {
                     message: "add error"
                 }
             } else {
-                let job = await this.jobRepository.save(data)
-                return job
+                return await this.jobRepository.save(data)
             }
         })
 
     }
     editJob = async (id, data) => {
-        let query = `UPDATE job
-                     SET companyId   = ${data.companyId},
-                         title       = '${data.title}',
-                         wageStart   ='${data.wageStart}',
-                         wageEnd     ='${data.wageEnd}',
-                         addressWork ='${data.addressWork}',
-                         vacancies   ='${data.vacancies}',
-                         experience  ='${data.experience}',
-                         status      =${data.status},
-                         endDate     ='${data.endDate}',
-                         description ='${data.description}',
-                         codeJob     ='${data.codeJob}'
-                     WHERE jobId = ${id}`;
-        return await this.jobRepository.query(query)
+        return await this.jobRepository.update({jobId: +id}, data)
     }
     deleteJob = async (id) => {
         let query = `delete
@@ -62,45 +47,40 @@ export class JobService {
         let query = `select *
                      from job
                      where title like '%${job.title}%'`
-        let jobs = await this.jobRepository.query(query)
-        return jobs
+        return await this.jobRepository.query(query)
     }
     searchAddress = async (job) => {
         let query = `select *
                      from job
                      where addressWork like '%${job.addressWork}%'`
-        let address = await this.jobRepository.query(query)
-        return address
+        return await this.jobRepository.query(query)
+
     }
-    findJobById = async (id)=>{
+    findJobById = async (id) => {
         let query = `select *
                      from job
                      where companyId = ${id}`
-        let job = await this.jobRepository.query(query)
-        return job
+        return await this.jobRepository.query(query)
+
+    }
+    setStatusJob = async (jobId, status) => {
+        let query = `update job
+                     set status = ${status}
+                     where jobId = ${jobId}`
+        return await this.jobRepository.query(query)
     }
     jobStatus = async (id) => {
         let query = `select *
                      from job
                      where jobId = ${id}`
         let job = await this.jobRepository.query(query)
+        if (job[0].status === false) {
+            this.setStatusJob(id, true)
+        } else {
+            this.setStatusJob(id, false)
+        }
+        return await this.findJobById(id)
 
-        if (job[0].status == 0) {
-            let query = `update job
-                         set status = 1
-                         where jobId = ${id}`
-            await this.jobRepository.query(query)
-        }
-        if (job[0].status == 1) {
-            let query = `update job
-                         set status = 0
-                         where jobId = ${id}`
-            await this.jobRepository.query(query)
-        }
-        let jobs = await this.jobRepository.query(`select *
-                                                   from job
-                                                   where jobId = ${id}`)
-        return jobs
     }
 
 

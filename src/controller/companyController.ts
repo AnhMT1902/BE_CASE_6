@@ -10,10 +10,13 @@ class CompanyController {
             let companyFind = await CompanyService.loginCompany(company);
             return res.status(200).json(companyFind)
         } catch (e) {
-            console.log(e.message)
+            res.json({
+                mess: e.message
+            })
         }
 
     }
+
     registerCompany = async (req: Request, res: Response) => {
         try {
             const password = await this.randomPassword()
@@ -24,18 +27,10 @@ class CompanyController {
                 return this.sendMailForCompany(req, res, password, company.email, companyFind);
             } else return res.status(200).json(companyFind)
         } catch (e) {
-            console.log(e)
+            res.json({
+                mess: e.message
+            })
         }
-    }
-
-    randomPassword = async () => {
-        let str = `qwpc89vbnerag6h7styu234iodfjklzxm150`
-        console.log(str.length)
-        let password = ''
-        while (password.length <= 8) {
-            password += str[Math.floor(Math.random() * 36)]
-        }
-        return password
     }
 
     updateCompany = async (req: Request, res: Response) => {
@@ -45,9 +40,12 @@ class CompanyController {
             let companyFind = await CompanyService.updateCompany(companyEdit);
             return res.status(200).json(companyFind)
         } catch (e) {
-            console.log(e)
+            res.json({
+                mess: e.message
+            })
         }
     }
+
     sendMailForCompany = (req, res, password, email, companyFind) => {
         let transporter = nodemailer.createTransport({ // config mail server
             service: 'gmail',
@@ -80,6 +78,15 @@ class CompanyController {
                 return res.status(200).json(companyFind)
             }
         });
+    }
+    randomPassword = async () => {
+        let str = `qwpc89vbnerag6h7styu234iodfjklzxm150`
+        console.log(str.length)
+        let password = ''
+        while (password.length <= 8) {
+            password += str[Math.floor(Math.random() * 36)]
+        }
+        return password
     }
 }
 
