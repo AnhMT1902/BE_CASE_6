@@ -9,26 +9,30 @@ npm run start:dev
 
 //company:
 
-1. localhost: 8080/company/login  
+1. POST localhost: 8080/company/login  
    (đăng nhập dành cho doanh nghiệp, yêu cầu đăng nhập bằng email đã đăng ký, mật khẩu được hệ thống gửi đến mail của
    người đăng ký)
 
-2. http://localhost: 8080/company/register  
+2. POST http://localhost: 8080/company/register  
    (đăng ký doanh nghiệp , yêu cầu bắt buộc có trường email, name, phoneNumber, address)
 
-3. http://localhost: 8080/company/update/:companyId
+3. PUT http://localhost: 8080/company/update/:companyId
    (update thông tin doanh nghiệp,phải đủ tất cả các trường mới cho đăng bài tuyển dụng)
 
 # user
 
-1. localhost: 8080/company/login 
-API 8080
-# Router 
-JobRouter.get('/',JobController.getAll) / Lấy tất cả danh sách công việc |localhost:8080/job
-JobRouter.post('/',JobController.add) / đăng thông tin công việc         | 
-JobRouter.put('/:id',JobController.edit) / sửa thông tin công việc     |localhost:8080/job/:id
-JobRouter.delete('/:id',jobController.delete) / xóa thông tin công việc|
-JobRouter.post('/search',jobController.search) / Tìm thông tin công việc theo tên công việc                   |localhost:8080/job/search
-JobRouter.post('/searchAddress',jobController.searchAddress) / Tìm thông tin công việc theo địa chỉ công việc |localhost:8080/job/searchAddress
-JobRouter.get('/:id',JobController.jobStatus) / lock/unlock status      | localhost:8080/job/:id
-JobRouter.get('/company/:id',JobController.findJobById) / Tìm thông tin công việc theo id company  |localhost:8080/job/company/:id
+1. POST localhost: 8080/company/login
+
+# job
+
+1. GET localhost:8080/job ( Lấy tất cả danh sách công việc)
+2. POST localhost:8080/job (đăng thông tin công việc )
+   JobRouter.put('/:id',JobController.edit) / sửa thông tin công việc |localhost:8080/job/:id
+   JobRouter.delete('/:id',jobController.delete) / xóa thông tin công việc|
+   JobRouter.post('/search',jobController.search) / Tìm thông tin công việc theo tên công việc |localhost:
+   8080/job/search
+   JobRouter.post('/searchAddress',jobController.searchAddress) / Tìm thông tin công việc theo địa chỉ công việc
+   |localhost:8080/job/searchAddress
+   JobRouter.get('/:id',JobController.jobStatus) / lock/unlock status | localhost:8080/job/:id
+   JobRouter.get('/company/:id',JobController.findJobById) / Tìm thông tin công việc theo id company |localhost:
+   8080/job/company/:id
