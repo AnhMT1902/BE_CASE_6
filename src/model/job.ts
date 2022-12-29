@@ -7,6 +7,8 @@ export class Job {
     public readonly jobId: number;
     @Column({type: "int"})
     public companyId: number;
+    @Column({type: "int"})
+    public categoryId: number;
     @IsNotEmpty()
     @Column({type: "varchar"})
     @IsNotEmpty()
@@ -15,7 +17,7 @@ export class Job {
     public wageStart: string;
     @Column({type: "int"})
     public wageEnd: string;
-    @Column({type: "int"})
+    @Column({type: "text"})
     public addressWork: string;
     @Column({type: "varchar"})//vị trí tuyển dụng
     public vacancies: string;
@@ -23,14 +25,14 @@ export class Job {
     public experience: string;
     @IsNotEmpty()
     @Column({type: "boolean"})
-    public status: boolean ;
-    @Column({nullable:true,type: "boolean"})
-    public statusTime: boolean ;// full time, part time
-    @Column({type: "date"})
-    public endDate: Date;
+    public status: boolean;
+    @Column({nullable: true, type: "boolean"})
+    public statusTime: boolean;// full time, part time
+    @Column({type: "varchar"})
+    public endDate: string;
     @IsNotEmpty()
     @Column({type: "text"})
     public description: string;
-    @Column({nullable:true ,type: "text"})
+    @Column({nullable: true, type: "text"})
     public codeJob: string; // CODE+ mã cty+ id job
 }

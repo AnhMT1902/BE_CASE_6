@@ -26,7 +26,7 @@ export class JobService {
         return await validate(dataValidator).then(async (error) => {
             if (error.length > 0) {
                 return {
-                    message: "add error"
+                    message: "validate fail"
                 }
             } else {
                 return await this.jobRepository.save(data)
@@ -69,20 +69,19 @@ export class JobService {
                      where jobId = ${jobId}`
         return await this.jobRepository.query(query)
     }
-    jobStatus = async (id) => {
+    editStatusJobById = async (id) => {
         let query = `select *
                      from job
                      where jobId = ${id}`
         let job = await this.jobRepository.query(query)
-        if (job[0].status === false) {
-            this.setStatusJob(id, true)
+        console.log(job)
+        if (job[0].status === 0) {
+            await this.setStatusJob(id, 1)
         } else {
-            this.setStatusJob(id, false)
+            await this.setStatusJob(id, 0)
         }
         return await this.findJobById(id)
 
     }
-
-
 }
 
