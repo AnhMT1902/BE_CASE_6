@@ -1,10 +1,6 @@
 import {Request, Response} from "express";
 import CompanyService from "../service/companyService";
-import {Company} from "../model/company";
 import nodemailer from 'nodemailer';
-import templateLib from "../libs/TemplateLib";
-import fs from "fs";
-import path from "path";
 
 class CompanyController {
 
@@ -33,15 +29,13 @@ class CompanyController {
     }
 
     randomPassword = async () => {
-        let str = `qwertyuiopasdfghjklzxcvbnm1234567890`
+        let str = `qwpc89vbnerag6h7styu234iodfjklzxm150`
+        console.log(str.length)
         let password = ''
-        for (let i = Math.floor(Math.random() * str.length - 1); i <= str.length; i = Math.floor(Math.random() * str.length - 1)) {
-            if (password.length >= 8) {
-                return password
-            } else {
-                password += str[i]
-            }
+        while (password.length <= 8) {
+            password += str[Math.floor(Math.random() * 36)]
         }
+        return password
     }
 
     updateCompany = async (req: Request, res: Response) => {
@@ -61,28 +55,29 @@ class CompanyController {
             port: 587,
             secure: false,
             auth: {
-                user: 'cskh@ieltsmentor.edu.vn', //Tài khoản gmail vừa tạo
-                pass: 'Ieltsmentor@123' //Mật khẩu tài khoản gmail vừa tạo
+                user: 'find.jobc07@gmail.com', //Tài khoản gmail vừa tạo
+                pass: 'utrmdjfrigniottr'//Mật khẩu tài khoản gmail vừa tạo
             }
         });
         let mainOptions = { // thiết lập đối tượng, nội dung gửi mail
             from: 'find.jobc07@gmail.com',
             to: `${email}`,
-            subject: 'Xin chào',
-            text: `mật khẩu đăng nhập của bạn là ${password}`,//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
+            subject: `Xin chào ${email}`,
+            text: `mật khẩu đăng nhập của bạn là: "${password}"
+            bạn có thể đăng nhập tại http://localhost:3000/work/login
+               `//Thường thi mình không dùng cái này thay vào đó mình sử dụng html để dễ edit hơn
             // html: content //Nội dung html mình đã tạo trên kia :))
         }
         transporter.sendMail(mainOptions, function (err, info) {
             if (err) {
                 console.log(err);
-                res.status(200).json({
+                return res.status(200).json({
                     message: `mess, Lỗi gửi mail:  + ${err}`
                 })
             } else {
                 companyFind.email = 'Message sent: ' + info.response
                 //Gửi thông báo đến người dùng
-                res.status(200).json(companyFind)
-
+                return res.status(200).json(companyFind)
             }
         });
     }
