@@ -10,7 +10,11 @@ export class JobService {
     }
 
     findAll = async () => {
-        return await this.jobRepository.find()
+        let sql = `select *
+                   from job
+                            join category
+                   group by jobId`
+        return await this.jobRepository.query(sql)
     }
     addJob = async (data) => {
         let dataValidator = new Job()
@@ -26,13 +30,12 @@ export class JobService {
         return await validate(dataValidator).then(async (error) => {
             if (error.length > 0) {
                 return {
-                    message: "add error"
+                    message: "validate fail"
                 }
             } else {
                 return await this.jobRepository.save(data)
             }
         })
-
     }
     editJob = async (id, data) => {
         return await this.jobRepository.update({jobId: +id}, data)
@@ -46,43 +49,46 @@ export class JobService {
     searchJob = async (job) => {
         let query = `select *
                      from job
-                     where title like '%${job.title}%'`
+                              join category
+                     where title like '%${job.title}%'
+                     group by jobId`
         return await this.jobRepository.query(query)
     }
     searchAddress = async (job) => {
         let query = `select *
                      from job
-                     where addressWork like '%${job.addressWork}%'`
+                              join category
+                     where addressWork like '%${job.addressWork}%'
+                     group by jobId`
         return await this.jobRepository.query(query)
-
     }
     findJobById = async (id) => {
         let query = `select *
                      from job
-                     where companyId = ${id}`
+                              join category
+                     where companyId = ${id}
+                     group by jobId`
         return await this.jobRepository.query(query)
-
     }
     setStatusJob = async (jobId, status) => {
         let query = `update job
+                         join category
                      set status = ${status}
                      where jobId = ${jobId}`
         return await this.jobRepository.query(query)
     }
-    jobStatus = async (id) => {
+    editStatusJobById = async (id) => {
         let query = `select *
                      from job
                      where jobId = ${id}`
         let job = await this.jobRepository.query(query)
-        if (job[0].status === false) {
-            this.setStatusJob(id, true)
+        console.log(job)
+        if (job[0].status === 0) {
+            await this.setStatusJob(id, 1)
         } else {
-            this.setStatusJob(id, false)
+            await this.setStatusJob(id, 0)
         }
         return await this.findJobById(id)
-
     }
-
-
 }
 
