@@ -1,9 +1,8 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
-import {CompanyDto} from "../dto/companyDto";
 import {IsEmail, IsNotEmpty, Max, MAX, Min} from "class-validator";
 
 @Entity()
-export class Company extends CompanyDto {
+export class Company {
     @PrimaryGeneratedColumn()
     public readonly companyId: number;
     @Column({
