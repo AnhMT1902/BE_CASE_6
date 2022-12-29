@@ -7,6 +7,7 @@ export class Job {
     public readonly jobId: number;
     @Column({type: "int"})
     public companyId: number;
+    @IsNotEmpty()
     @Column({type: "varchar"})
     @IsNotEmpty()
     public title: string;
@@ -21,11 +22,13 @@ export class Job {
     @Column({type: "varchar"})
     public experience: string;
     @Column({type: "varchar"})
+    @IsNotEmpty()
     public status: string;// full time, part time
     @Column({type: "date"})
     public endDate: Date;
+    @IsNotEmpty()
     @Column({type: "text"})
     public description: string;
-    @Column({type: "text"})
+    @Column({nullable:true ,type: "text"})
     public codeJob: string; // CODE+ mã cty+ id job
 }

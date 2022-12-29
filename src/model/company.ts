@@ -28,6 +28,10 @@ export class Company extends CompanyDto {
     @Column({
         nullable: true, type: "text"
     })
+    public description: string;
+    @Column({
+        nullable: true, type: "text"
+    })
     public address: string;
     @Column({
         nullable: true, type: "int"
@@ -49,4 +53,8 @@ export class Company extends CompanyDto {
         nullable: true, type: 'varchar'
     })
     public phoneNumber: string;
+    @Column({
+        nullable: true, type: 'varchar'
+    })
+    public website: string;
 }
