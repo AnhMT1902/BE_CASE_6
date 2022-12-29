@@ -6,8 +6,9 @@ class UserController {
     registerUser = async (req: Request, res: Response) => {
         try {
             let user = req.body
+            console.log(user)
             let userFind = await userService.registerUser(user);
-            await this.sendMailForUser
+            await this.sendMailForUser(req, res, user.email)
             return res.status(200).json(userFind)
         } catch (e) {
             console.log(e.message)
@@ -22,7 +23,7 @@ class UserController {
             console.log(e.message)
         }
     }
-    sendMailForUser = async (req, res, password, email) => {
+    sendMailForUser = async (req, res, email) => {
         let transporter = nodemailer.createTransport({ // config mail server
             service: 'gmail',
             host: "smtp.ethereal.email",
@@ -30,7 +31,7 @@ class UserController {
             secure: false,
             auth: {
                 user: 'find.jobc07@gmail.com', //Tài khoản gmail vừa tạo
-                pass: 'utrmdjfrigniottr' //Mật khẩu tài khoản gmail vừa tạo
+                pass: 'hhzkbpgikhlecmrt' //Mật khẩu tài khoản gmail vừa tạo
             }
         });
         let mainOptions = { // thiết lập đối tượng, nội dung gửi mail
