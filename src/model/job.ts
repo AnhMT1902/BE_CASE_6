@@ -27,7 +27,7 @@ export class Job {
     @Column({type: "boolean"})
     public status: boolean;
     @Column({nullable: true, type: "boolean"})
-    public statusTime: boolean;// full time, part time
+    public statusTime: boolean;// full time, parttime
     @Column({type: "varchar"})
     public endDate: string;
     @IsNotEmpty()
