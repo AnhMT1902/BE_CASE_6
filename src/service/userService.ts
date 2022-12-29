@@ -16,7 +16,6 @@ class UserService {
             return {
                 message: "Incorrect login information",
                 checkLogin: false
-
             }
         } else {
             let comparePassword = await bcrypt.compare(user.password, userFind[0].password)
@@ -24,7 +23,6 @@ class UserService {
                 return {
                     message: "Password wrong!!!",
                     checkLogin: false
-
                 }
             } else {
                 let payload = {
@@ -51,19 +49,19 @@ class UserService {
 
     registerUser = async (user) => {
         let userFind = await this.findUserByEmail(user.email)
-        console.log(user)
         if (userFind.length !== 0) {
             return {
                 message: "email has been used",
-                checkRegister: false
+                checkRegister: false,
+                emails: 'send mail error'
             }
         } else {
             user.password = await bcrypt.hash(user.password, 10);
             this.userRepository.save(user)
             return {
                 message: "register success",
-                checkRegister: true
-
+                checkRegister: true,
+                emails: 'send mail ok!'
             }
 
         }
