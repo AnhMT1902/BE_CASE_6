@@ -19,8 +19,16 @@ npm run start:dev
 3. http://localhost: 8080/company/update/:companyId
    (update thông tin doanh nghiệp,phải đủ tất cả các trường mới cho đăng bài tuyển dụng)
 
-4. http://localhost: 8080/
-
 # user
 
 1. localhost: 8080/company/login 
+API 8080
+# Router 
+JobRouter.get('/',JobController.getAll) / Lấy tất cả danh sách công việc |localhost:8080/job
+JobRouter.post('/',JobController.add) / đăng thông tin công việc         | 
+JobRouter.put('/:id',JobController.edit) / sửa thông tin công việc     |localhost:8080/job/:id
+JobRouter.delete('/:id',jobController.delete) / xóa thông tin công việc|
+JobRouter.post('/search',jobController.search) / Tìm thông tin công việc theo tên công việc                   |localhost:8080/job/search
+JobRouter.post('/searchAddress',jobController.searchAddress) / Tìm thông tin công việc theo địa chỉ công việc |localhost:8080/job/searchAddress
+JobRouter.get('/:id',JobController.jobStatus) / lock/unlock status      | localhost:8080/job/:id
+JobRouter.get('/company/:id',JobController.findJobById) / Tìm thông tin công việc theo id company  |localhost:8080/job/company/:id

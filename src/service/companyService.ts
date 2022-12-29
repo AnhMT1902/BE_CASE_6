@@ -21,7 +21,7 @@ class CompanyService {
             let comparePassword = await bcrypt.compare(company.password, companyFind[0].password)
             if (!comparePassword) {
                 return {
-                    message: "Incorrect login information"
+                    message: "Password wrong!!!"
                 }
             } else {
                 let payload = {
