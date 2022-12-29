@@ -84,7 +84,6 @@ class CompanyService {
         company.companyCode = `${company.abbreviatedName.substring(0, 3)} + ${+company.companyId - 1} + ${Math.floor(Math.random() * 4 + 1000)}`
         return this.companyRepository.update({companyId: company.companyId}, company)
     }
-
 }
 
 export default new CompanyService();
