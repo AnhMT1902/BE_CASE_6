@@ -58,6 +58,16 @@ class JobController {
             })
         }
     }
+    findJobById = async (req:Request,res:Response)=>{
+        try{
+            let job = await this.jobService.findJobById(req.params.id)
+            return res.status(200).json(job)
+        }catch (e){
+            res.json({
+                mess:e.message
+            })
+        }
+    }
     searchAddress = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.searchAddress(req.body)

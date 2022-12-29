@@ -10,4 +10,5 @@ JobRouter.delete('/:id',jobController.delete)
 JobRouter.post('/search',jobController.search)
 JobRouter.post('/searchAddress',jobController.searchAddress)
 JobRouter.get('/:id',JobController.jobStatus)
+JobRouter.post('/company/:id',JobController.findJobById)
 

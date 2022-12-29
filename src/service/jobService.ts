@@ -72,6 +72,13 @@ export class JobService {
         let address = await this.jobRepository.query(query)
         return address
     }
+    findJobById = async (id)=>{
+        let query = `select *
+                     from job
+                     where companyId = ${id}`
+        let job = await this.jobRepository.query(query)
+        return job
+    }
     jobStatus = async (id) => {
         let query = `select *
                      from job
@@ -79,15 +86,20 @@ export class JobService {
         let job = await this.jobRepository.query(query)
 
         if (job[0].status == 0) {
-            let   query = `update job set status = 1 where jobId =${id}`
-             await this.jobRepository.query(query)
-        }if (job[0].status == 1){
-          let   query = `update job set status = 0 where jobId =${id}`
+            let query = `update job
+                         set status = 1
+                         where jobId = ${id}`
+            await this.jobRepository.query(query)
+        }
+        if (job[0].status == 1) {
+            let query = `update job
+                         set status = 0
+                         where jobId = ${id}`
             await this.jobRepository.query(query)
         }
         let jobs = await this.jobRepository.query(`select *
-                     from job
-                     where jobId = ${id}`)
+                                                   from job
+                                                   where jobId = ${id}`)
         return jobs
     }
 
