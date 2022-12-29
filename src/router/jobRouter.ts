@@ -9,4 +9,5 @@ JobRouter.put('/:id',JobController.edit)
 JobRouter.delete('/:id',jobController.delete)
 JobRouter.post('/search',jobController.search)
 JobRouter.post('/searchAddress',jobController.searchAddress)
+JobRouter.get('/:id',JobController.jobStatus)
 

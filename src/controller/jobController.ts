@@ -68,6 +68,18 @@ class JobController {
             })
         }
     }
+    jobStatus = async (req: Request, res: Response) => {
+        try {
+            let jobs = await this.jobService.jobStatus(req.params.id)
+            return res.status(200).json(jobs)
+
+
+        } catch (e) {
+            res.json({
+                mess: e.message
+            })
+        }
+    }
 }
 
 export default new JobController();
