@@ -21,9 +21,11 @@ export class Job {
     public vacancies: string;
     @Column({type: "varchar"})
     public experience: string;
-    @Column({type: "varchar"})
     @IsNotEmpty()
-    public status: string;// full time, part time
+    @Column({type: "boolean"})
+    public status: boolean ;
+    @Column({nullable:true,type: "boolean"})
+    public statusTime: boolean ;// full time, part time
     @Column({type: "date"})
     public endDate: Date;
     @IsNotEmpty()

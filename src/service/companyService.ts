@@ -21,7 +21,7 @@ class CompanyService {
             let comparePassword = await bcrypt.compare(company.password, companyFind[0].password)
             if (!comparePassword) {
                 return {
-                    message: "Incorrect login information"
+                    message: "Password wrong!!!"
                 }
             } else {
                 let payload = {
@@ -62,10 +62,9 @@ class CompanyService {
         return await validate(companyRegister).then(async (errors) => {
             if (errors.length > 0) {
                 return {
-                    message : 'validation failed. errors:'
+                    message: 'validation failed. errors:'
                 }
             } else {
-                console.log('validation succeed');
                 let companyFind = await this.findCompanyByEmail(company.email)
                 if (companyFind.length !== 0) {
                     return {
@@ -82,6 +81,7 @@ class CompanyService {
         });
     }
     updateCompany = (company) => {
+        company.companyCode = `${company.abbreviatedName.substring(0, 3)} + ${+company.companyId - 1} + ${Math.floor(Math.random() * 4 + 1000)}`
         return this.companyRepository.update({companyId: company.companyId}, company)
     }
 
