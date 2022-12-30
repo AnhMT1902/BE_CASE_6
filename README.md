@@ -29,8 +29,8 @@ npm run start:dev
 2. POST localhost:8080/job (đăng thông tin công việc )
    JobRouter.put('/:id',JobController.edit) / sửa thông tin công việc |localhost:8080/job/:id
    JobRouter.delete('/:id',jobController.delete) / xóa thông tin công việc|
-   JobRouter.post('/search',jobController.search) / Tìm thông tin công việc theo tên công việc |localhost:
-   8080/job/search
+   JobRouter.post('/search',jobController.search) / Tìm thông tin công việc theo tên công việc |
+3. localhost:8080/job/search
    JobRouter.post('/searchAddress',jobController.searchAddress) / Tìm thông tin công việc theo địa chỉ công việc
    |localhost:8080/job/searchAddress
    JobRouter.get('/:id',JobController.jobStatus) / lock/unlock status | localhost:8080/job/:id
