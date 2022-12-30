@@ -50,7 +50,8 @@ class JobController {
     }
     search = async (req: Request, res: Response) => {
         try {
-            let job = await this.jobService.searchJob(req.body)
+            let query = req.query
+            let job = await this.jobService.searchJob(query)
             return res.status(200).json(job)
         } catch (e) {
             res.json({
