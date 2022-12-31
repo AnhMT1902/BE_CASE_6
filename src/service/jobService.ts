@@ -27,6 +27,8 @@ export class JobService {
         dataValidator.status = data.status
         dataValidator.endDate = data.endDate
         dataValidator.description = data.description
+        dataValidator.applicants = data.applicants
+
         return await validate(dataValidator).then(async (error) => {
             if (error.length > 0) {
                 return {
