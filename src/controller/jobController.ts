@@ -81,7 +81,6 @@ class JobController {
     editStatusJobById = async (req: Request, res: Response) => {
         try {
             let jobs = await this.jobService.editStatusJobById(req.params.id)
-            console.log('a')
             return res.status(200).json(jobs)
         } catch (e) {
             res.json({
