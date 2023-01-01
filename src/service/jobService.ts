@@ -64,16 +64,16 @@ export class JobService {
                      group by jobId`
         return await this.jobRepository.query(query)
     }
-    findJobById = async (id) => {
-        let query = `select *
-                     from job
-                              join category
-                     where jobId = ${id}
-                     group by jobId`
-        let result = await this.jobRepository.query(query)
-        console.log('kết quả đây',result)
-        return result
-    }
+    // findJobById = async (id) => {
+    //     let query = `select *
+    //                  from job
+    //                           join category
+    //                  where jobId = ${id}
+    //                  group by jobId`
+    //     let result = await this.jobRepository.query(query)
+    //     console.log('kết quả đây',result)
+    //     return result
+    // }
     setStatusJob = async (jobId, status) => {
         let query = `update job
                          join category
@@ -86,14 +86,13 @@ export class JobService {
                      from job
                      where jobId = ${id}`
         let job = await this.jobRepository.query(query)
-        console.log(job)
+
         if (job[0].status === 0) {
             await this.setStatusJob(id, 1)
         } else {
             await this.setStatusJob(id, 0)
         }
         let result = await this.jobRepository.find()
-        console.log('đây nữa', result)
         return result
     }
 }
