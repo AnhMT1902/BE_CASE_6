@@ -11,13 +11,34 @@ export class JobService {
 
     findAll = async () => {
         let sql = `select *
-                   from job
-                            join category
-                   group by jobId`
+                   from job 
+                            join category 
+                   group by jobId  `
         return await this.jobRepository.query(sql)
     }
+    addJob = async (data) => {
+        let dataValidator = new Job()
+        dataValidator.title = data.title
+        dataValidator.wageStart = data.wageStart
+        dataValidator.wageEnd = data.wageEnd
+        dataValidator.addressWork = data.addressWork
+        dataValidator.vacancies = data.vacancies
+        dataValidator.experience = data.experience
+        dataValidator.status = data.status
+        dataValidator.endDate = data.endDate
+        dataValidator.description = data.description
+        dataValidator.applicants = data.applicants
 
-
+        return await validate(dataValidator).then(async (error) => {
+            if (error.length > 0) {
+                return {
+                    message: "validate fail"
+                }
+            } else {
+                return await this.jobRepository.save(data)
+            }
+        })
+    }
     editJob = async (id, data) => {
         return await this.jobRepository.update({jobId: +id}, data)
     }
@@ -25,8 +46,7 @@ export class JobService {
         let query = `delete
                      from job
                      where jobId =` + id
-        let deleteJob =  await this.jobRepository.query(query)
-        return deleteJob
+        await this.jobRepository.query(query)
     }
     searchJob = async (job) => {
         let query = `select *
@@ -48,31 +68,11 @@ export class JobService {
         let query = `select *
                      from job
                               join category
-                     where companyId = ${id}
+                     where jobId = ${id}
                      group by jobId`
-        return await this.jobRepository.query(query)
-    }
-
-    addJob = async (data) => {
-        let dataValidator = new Job()
-        dataValidator.title = data.title
-        dataValidator.wageStart = data.wageStart
-        dataValidator.wageEnd = data.wageEnd
-        dataValidator.addressWork = data.addressWork
-        dataValidator.vacancies = data.vacancies
-        dataValidator.experience = data.experience
-        dataValidator.status = data.status
-        dataValidator.endDate = data.endDate
-        dataValidator.description = data.description
-        return await validate(dataValidator).then(async (error) => {
-            if (error.length > 0) {
-                return {
-                    message: "validate fail"
-                }
-            } else {
-               return  await this.jobRepository.save(data)
-            }
-        })
+        let result = await this.jobRepository.query(query)
+        console.log('kết quả đây',result)
+        return result
     }
     setStatusJob = async (jobId, status) => {
         let query = `update job
@@ -92,8 +92,9 @@ export class JobService {
         } else {
             await this.setStatusJob(id, 0)
         }
-         await this.findJobById(id)
-        return job
+        let result = await this.jobRepository.find()
+        console.log('đây nữa', result)
+        return result
     }
 }
 
