@@ -13,7 +13,7 @@ export class JobService {
         let sql = `select *
                    from job
                             join category
-                   group by jobId`
+                   group by jobId `
         return await this.jobRepository.query(sql)
     }
     addJob = async (data) => {
@@ -76,7 +76,6 @@ export class JobService {
                    where ${condition}
                    group by jobId`
         return await this.jobRepository.query(sql)
-
     }
     searchAddress = async (job) => {
         let query = `select *
