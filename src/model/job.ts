@@ -13,21 +13,28 @@ export class Job {
     @Column({type: "varchar"})
     @IsNotEmpty()
     public title: string;
-    @Column({type: "varchar"})
-    public wageStart: string;
+
     @Column({type: "int"})
-    public wageEnd: string;
+    public wageStart: number;
+
+    @Column({type: "int"})
+    public wageEnd: number;
+
     @Column({type: "text"})
     public addressWork: string;
     @Column({type: "varchar"})//vị trí tuyển dụng
     public vacancies: string;
     @Column({type: "varchar"})
     public experience: string;
+F
+
     @IsNotEmpty()
-    @Column({type: "boolean"})
-    public status: boolean;
-    @Column({nullable: true, type: "boolean"})
-    public statusTime: boolean;// full time, parttime
+    @Column({type: "int"})
+    public status: number;
+
+
+    @Column({nullable: true, type: "int"})
+    public statusTime: number;// full time, parttime
     @Column({type: "varchar"})
     public endDate: string;
     @IsNotEmpty()
