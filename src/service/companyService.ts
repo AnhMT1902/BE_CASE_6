@@ -33,7 +33,7 @@ class CompanyService {
                     expiresIn: 36000
                 })
                 return {
-                    token: token,
+                    token: token,   
                     company: companyFind[0]
                 }
             }

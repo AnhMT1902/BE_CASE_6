@@ -13,7 +13,6 @@ export class JobService {
         let sql = `select *
                    from job
                             join category
-                   where status = 1
                    group by jobId`
         return await this.jobRepository.query(sql)
     }
@@ -29,6 +28,8 @@ export class JobService {
         dataValidator.status = data.status
         dataValidator.endDate = data.endDate
         dataValidator.description = data.description
+        dataValidator.applicants = data.applicants
+
         return await validate(dataValidator).then(async (error) => {
             if (error.length > 0) {
                 return {
@@ -55,7 +56,7 @@ export class JobService {
         let str = ''
         for (const key in query) {
             if (key === 'key') {
-                str += `(company.name like '${query[key]}' or job.title like '${query[key]}') and `
+                str += `(job.title like '%${query[key]}%') and `
             } else {
                 if (typeof query[key] === "string") {
                     str += `job.${key} like '${query[key]}' and `
@@ -81,29 +82,23 @@ export class JobService {
         let sql = `select *
                    from job
                             join category
+                            join company on job.companyId = company.companyId
                    where ${condition}
                    group by jobId`
+        console.log(sql)
         return await this.jobRepository.query(sql)
-    }
-
-    searchAddress = async (job) => {
-        let query = `select *
-                     from job
-                              join category
-                     where addressWork like '%${job.addressWork}%'
-                     group by jobId`
-        return await this.jobRepository.query(query)
     }
 
     findJobById = async (id) => {
         let query = `select *
                      from job
                               join category
-                     where companyId = ${id}
+                     where jobId = ${id}
                      group by jobId`
-        return await this.jobRepository.query(query)
+        let result = await this.jobRepository.query(query)
+        console.log('kết quả đây', result)
+        return result
     }
-
     setStatusJob = async (jobId, status) => {
         let query = `update job
                          join category
@@ -121,7 +116,6 @@ export class JobService {
         } else {
             await this.setStatusJob(id, 0)
         }
-        return await this.findJobById(id)
     }
 }
 

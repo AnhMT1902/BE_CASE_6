@@ -34,7 +34,7 @@ F
 
 
     @Column({nullable: true, type: "int"})
-    public statusTime: number;// full time, parttime
+    public statusTime: number;// full time, parttime (0 :full time ; 1 :part time)
     @Column({type: "varchar"})
     public endDate: string;
     @IsNotEmpty()
@@ -42,4 +42,6 @@ F
     public description: string;
     @Column({nullable: true, type: "text"})
     public codeJob: string; // CODE+ mã cty+ id job
+    @Column({type: "int"})
+    public applicants: number;
 }
