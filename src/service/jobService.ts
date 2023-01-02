@@ -40,7 +40,7 @@ export class JobService {
         })
     }
     editJob = async (id, data) => {
-
+        console.log(id)
         await this.jobRepository.update({jobId: id}, data)
         return this.findJobById(data.companyId)
     }
@@ -50,12 +50,14 @@ export class JobService {
                      where jobId =` + id
         await this.jobRepository.query(query)
     }
+
     searchJob = async (job) => {
         let query = `select *
                      from job
                               join category
                      where title like '%${job.title}%'
                      group by jobId`
+        console.log(query)
         return await this.jobRepository.query(query)
     }
     searchAddress = async (job) => {
