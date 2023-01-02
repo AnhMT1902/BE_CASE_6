@@ -13,7 +13,7 @@ export class JobService {
         let sql = `select *
                    from job 
                             join category 
-                   group by jobId  `
+                   group by jobId order by jobId`
         return await this.jobRepository.query(sql)
     }
     addJob = async (data) => {
@@ -40,7 +40,9 @@ export class JobService {
         })
     }
     editJob = async (id, data) => {
-        return await this.jobRepository.update({jobId: +id}, data)
+
+        await this.jobRepository.update({jobId: id}, data)
+        return this.findJobById(data.companyId)
     }
     deleteJob = async (id) => {
         let query = `delete
@@ -64,16 +66,15 @@ export class JobService {
                      group by jobId`
         return await this.jobRepository.query(query)
     }
-    // findJobById = async (id) => {
-    //     let query = `select *
-    //                  from job
-    //                           join category
-    //                  where jobId = ${id}
-    //                  group by jobId`
-    //     let result = await this.jobRepository.query(query)
-    //     console.log('kết quả đây',result)
-    //     return result
-    // }
+    findJobById = async (id) => {
+        let query = `select *
+                     from job
+                              join category
+                     where companyId = ${id}
+                     group by jobId`
+        let result = await this.jobRepository.query(query)
+        return result
+    }
     setStatusJob = async (jobId, status) => {
         let query = `update job
                          join category
@@ -86,13 +87,12 @@ export class JobService {
                      from job
                      where jobId = ${id}`
         let job = await this.jobRepository.query(query)
-
         if (job[0].status === 0) {
             await this.setStatusJob(id, 1)
         } else {
             await this.setStatusJob(id, 0)
         }
-        let result = await this.jobRepository.find()
+        let result = await this.findJobById(job[0].companyId)
         return result
     }
 }
