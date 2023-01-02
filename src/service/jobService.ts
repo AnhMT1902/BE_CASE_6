@@ -11,9 +11,9 @@ export class JobService {
 
     findAll = async () => {
         let sql = `select *
-                   from job
-                            join category
-                   group by jobId`
+                   from job 
+                            join category 
+                   group by jobId order by jobId`
         return await this.jobRepository.query(sql)
     }
 
@@ -42,7 +42,9 @@ export class JobService {
     }
 
     editJob = async (id, data) => {
-        return await this.jobRepository.update({jobId: +id}, data)
+
+        await this.jobRepository.update({jobId: id}, data)
+        return this.findJobById(data.companyId)
     }
 
     deleteJob = async (id) => {
@@ -56,7 +58,7 @@ export class JobService {
         let str = ''
         for (const key in query) {
             if (key === 'key') {
-                str += `(job.title like '%${query[key]}%') and `
+                str += `(company.name  like '${query[key]}' or job.title like '%${query[key]}%') and `
             } else {
                 if (typeof query[key] === "string") {
                     str += `job.${key} like '${query[key]}' and `
@@ -93,10 +95,9 @@ export class JobService {
         let query = `select *
                      from job
                               join category
-                     where jobId = ${id}
+                     where companyId = ${id}
                      group by jobId`
         let result = await this.jobRepository.query(query)
-        console.log('kết quả đây', result)
         return result
     }
     setStatusJob = async (jobId, status) => {
@@ -116,6 +117,8 @@ export class JobService {
         } else {
             await this.setStatusJob(id, 0)
         }
+        let result = await this.findJobById(job[0].companyId)
+        return result
     }
 }
 

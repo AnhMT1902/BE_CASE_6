@@ -31,8 +31,11 @@ class JobController {
     }
     edit = async (req: Request, res: Response) => {
         try {
-            await this.jobService.editJob(req.params.id, req.body)
-            res.status(200).json({message: 'edit success'})
+            let job = await this.jobService.editJob(req.params.id, req.body)
+            res.status(200).json({
+                job,
+                mess: "ok"
+            })
         } catch (e) {
             res.json({
                 mess: e.message
@@ -53,6 +56,7 @@ class JobController {
         try {
             let query = req.query
             let job = await this.jobService.searchJob(query)
+            console.log(job)
             return res.status(200).json(job)
         } catch (e) {
             res.json({
