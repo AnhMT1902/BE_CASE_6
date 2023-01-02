@@ -11,8 +11,8 @@ export class JobService {
 
     findAll = async () => {
         let sql = `select *
-                   from job 
-                            join category 
+                   from job
+                            join category c on job.categoryId = c.categoryId
                    group by jobId order by jobId`
         return await this.jobRepository.query(sql)
     }
