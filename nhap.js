@@ -1,23 +1,27 @@
 
-function queryToString (query) {
+function queryToString(query) {
     let str = ''
     for (const key in query) {
-        if (typeof query[key] === "string") {
-            str += `${key} like '${query[key]}' and `
+        if (key === 'key') {
+            str += `(company.name like '${query[key]}' or job.title like '${query[key]}') and `
         } else {
-            query[key].forEach((item, index) => {
-                if (index === query[key].length - 1) {
-                    str += `${key} = ${item}) and `
-                } else if (index === 0) {
-                    str += `(${key} = ${item} or `
-                } else {
-                    str += `${key} = ${item} or `
-                }
-            })
+            if (typeof query[key] === "string") {
+                str += `job.${key} like '${query[key]}' and `
+            } else {
+                query[key].forEach((item, index) => {
+                    if (index === query[key].length - 1) {
+                        str += `job.${key} like '${item}') and `
+                    } else if (index === 0) {
+                        str += `(job.${key} like '${item}' or `
+                    } else {
+                        str += `job.${key} like '${item}' or `
+                    }
+                })
+            }
         }
     }
-    console.log(str.substring(0, str.length - 4))
+    return str.substring(0, str.length - 4)
 }
 
-// queryToString(query)
-console.log( typeof +'ádjká')
+console.log(queryToString({category: ['it', 'marketing'], key: 'abc'}
+))

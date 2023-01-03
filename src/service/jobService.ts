@@ -11,11 +11,12 @@ export class JobService {
 
     findAll = async () => {
         let sql = `select *
-                   from job
-                            join category
-                   group by jobId`
+                   from job 
+                            join category 
+                   group by jobId order by jobId`
         return await this.jobRepository.query(sql)
     }
+
     addJob = async (data) => {
         let dataValidator = new Job()
         dataValidator.title = data.title
@@ -27,6 +28,8 @@ export class JobService {
         dataValidator.status = data.status
         dataValidator.endDate = data.endDate
         dataValidator.description = data.description
+        dataValidator.applicants = data.applicants
+
         return await validate(dataValidator).then(async (error) => {
             if (error.length > 0) {
                 return {
@@ -37,9 +40,13 @@ export class JobService {
             }
         })
     }
+
     editJob = async (id, data) => {
-        return await this.jobRepository.update({jobId: +id}, data)
+
+        await this.jobRepository.update({jobId: id}, data)
+        return this.findJobById(data.companyId)
     }
+
     deleteJob = async (id) => {
         let query = `delete
                      from job
@@ -50,18 +57,22 @@ export class JobService {
     queryToString(query) {
         let str = ''
         for (const key in query) {
-            if (typeof query[key] === "string") {
-                str += `job.${key} like '${query[key]}' and `
+            if (key === 'key') {
+                str += `(company.name  like '${query[key]}' or job.title like '%${query[key]}%') and `
             } else {
-                query[key].forEach((item, index) => {
-                    if (index === query[key].length - 1) {
-                        str += `job.${key} like '${item}') and `
-                    } else if (index === 0) {
-                        str += `(job.${key} like '${item}' or `
-                    } else {
-                        str += `job.${key} like '${item}' or `
-                    }
-                })
+                if (typeof query[key] === "string") {
+                    str += `job.${key} like '${query[key]}' and `
+                } else {
+                    query[key].forEach((item, index) => {
+                        if (index === query[key].length - 1) {
+                            str += `job.${key} like '${item}') and `
+                        } else if (index === 0) {
+                            str += `(job.${key} like '${item}' or `
+                        } else {
+                            str += `job.${key} like '${item}' or `
+                        }
+                    })
+                }
             }
         }
         return str.substring(0, str.length - 4)
@@ -73,26 +84,21 @@ export class JobService {
         let sql = `select *
                    from job
                             join category
+                            join company on job.companyId = company.companyId
                    where ${condition}
                    group by jobId`
+        console.log(sql)
         return await this.jobRepository.query(sql)
+    }
 
-    }
-    searchAddress = async (job) => {
-        let query = `select *
-                     from job
-                              join category
-                     where addressWork like '%${job.addressWork}%'
-                     group by jobId`
-        return await this.jobRepository.query(query)
-    }
     findJobById = async (id) => {
         let query = `select *
                      from job
                               join category
                      where companyId = ${id}
                      group by jobId`
-        return await this.jobRepository.query(query)
+        let result = await this.jobRepository.query(query)
+        return result
     }
     setStatusJob = async (jobId, status) => {
         let query = `update job
@@ -106,13 +112,13 @@ export class JobService {
                      from job
                      where jobId = ${id}`
         let job = await this.jobRepository.query(query)
-        console.log(job)
         if (job[0].status === 0) {
             await this.setStatusJob(id, 1)
         } else {
             await this.setStatusJob(id, 0)
         }
-        return await this.findJobById(id)
+        let result = await this.findJobById(job[0].companyId)
+        return result
     }
 }
 
