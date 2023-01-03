@@ -1,3 +1,4 @@
+
 function queryToString(query) {
     let str = ''
     for (const key in query) {
