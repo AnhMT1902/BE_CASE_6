@@ -43,7 +43,7 @@ export class JobService {
     }
 
     editJob = async (id, data) => {
-
+        console.log(id)
         await this.jobRepository.update({jobId: id}, data)
         return this.findJobById(data.companyId)
     }
