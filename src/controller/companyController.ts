@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import CompanyService from "../service/companyService";
+import companyService from "../service/companyService";
 import nodemailer from 'nodemailer';
 
 class CompanyController {
@@ -87,6 +88,13 @@ class CompanyController {
             password += str[Math.floor(Math.random() * 36)]
         }
         return password
+    }
+    findCompanyById = async (req: Request, res: Response) => {
+        let id = +req.params.companyId
+        let companyFind = await companyService.findCompanyById(id)
+        return res.status(200).json({
+            companyFind: companyFind
+        })
     }
 }
 
