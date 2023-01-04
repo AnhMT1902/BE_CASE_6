@@ -51,7 +51,7 @@ class UserService {
         let userFind = await this.findUserByEmail(user.email)
         if (userFind.length !== 0) {
             return {
-                message: "email has been used",
+                message: "email has been used!",
                 checkRegister: false,
                 emails: 'send mail error'
             }
