@@ -13,6 +13,7 @@ export class JobService {
         let sql = `select *
                    from job
                             join category c on job.categoryId = c.categoryId
+                            join company c2 on job.companyId = c2.companyId
                    group by jobId
                    order by jobId`
         return await this.jobRepository.query(sql)
@@ -83,8 +84,8 @@ export class JobService {
         let condition = this.queryToString(query)
         let sql = `select *
                    from job
-                            join category c on job.categoryId = c.categoryId
-                            join company c2 on job.companyId = c2.companyId
+                            join category on job.categoryId = category.categoryId
+                            join company on job.companyId = company.companyId
                    where ${condition}
                    group by jobId`
         return await this.jobRepository.query(sql)
