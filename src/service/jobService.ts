@@ -55,17 +55,19 @@ export class JobService {
         await this.jobRepository.query(query)
     }
 
-    queryToString(query) {
+    objectToString(ojb) {
         let str = ''
-        for (const key in query) {
+        for (const key in ojb) {
             if (key === 'key') {
-                str += `(company.name  like '${query[key]}' or job.title like '%${query[key]}%') and `
+                str += `(company.name  like '${ojb[key]}' or job.title like '%${ojb[key]}%') and `
             } else {
-                if (typeof query[key] === "string") {
-                    str += `job.${key} like '${query[key]}' and `
+                let arrValue = ojb[key].split(',')
+                console.log(arrValue)
+                if (arrValue.length <= 1) {
+                    str += `job.${key} like '${ojb[key]}' and `
                 } else {
-                    query[key].forEach((item, index) => {
-                        if (index === query[key].length - 1) {
+                    arrValue.forEach((item, index) => {
+                        if (index === arrValue.length - 1) {
                             str += `job.${key} like '${item}') and `
                         } else if (index === 0) {
                             str += `(job.${key} like '${item}' or `
@@ -79,8 +81,9 @@ export class JobService {
         return str.substring(0, str.length - 4)
     }
 
-    searchJob = async (query) => {
-        let condition = this.queryToString(query)
+    searchJob = async (ojb) => {
+        console.log(ojb)
+        let condition = this.objectToString(ojb)
         let sql = `select *
                    from job
                             join category on job.categoryId = category.categoryId
