@@ -5,5 +5,5 @@ export class Category {
     @PrimaryGeneratedColumn()
     public readonly categoryId: number;
     @Column({type: "varchar"})
-    public name: string;
+    public nameCategory: string;
 }
