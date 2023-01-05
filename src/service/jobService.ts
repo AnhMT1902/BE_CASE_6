@@ -53,6 +53,7 @@ export class JobService {
                      from job
                      where jobId =` + id
         await this.jobRepository.query(query)
+        return await this.findJobByCompanyId(id)
     }
 
     objectToString(query) {
