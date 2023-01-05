@@ -43,8 +43,8 @@ class JobController {
     }
     delete = async (req: Request, res: Response) => {
         try {
-            await this.jobService.deleteJob(req.params.id)
-            res.status(200).json({message: 'delete success'})
+            let jobs = await this.jobService.deleteJob(req.params.id)
+            res.status(200).json({jobs, message: 'delete success'})
         } catch (e) {
             res.json({
                 mess: e.message
