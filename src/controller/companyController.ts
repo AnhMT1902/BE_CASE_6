@@ -111,5 +111,4 @@ class CompanyController {
     }
 }
 
-
 export default new CompanyController();
