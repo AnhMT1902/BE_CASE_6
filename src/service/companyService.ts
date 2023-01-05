@@ -33,7 +33,7 @@ class CompanyService {
                     expiresIn: 36000
                 })
                 return {
-                    token: token,   
+                    token: token,
                     company: companyFind[0]
                 }
             }
@@ -43,6 +43,7 @@ class CompanyService {
     findCompanyByEmail = async (email) => {
         let sql = `select *
                    from company
+                            join city on city.cityId = company.address
                    where email = '${email}'`
         return await this.companyRepository.query(sql);
     }
@@ -80,9 +81,19 @@ class CompanyService {
             }
         });
     }
+
+    findCompanyByIdCompany = async (id) => {
+        let sql = `select *
+                   from company
+                            join city on city.cityId = company.address
+                   where companyId = '${id}'`
+        return await this.companyRepository.query(sql);
+    }
+
     updateCompany = (company) => {
         company.companyCode = `${company.abbreviatedName.substring(0, 3)} + ${+company.companyId - 1} + ${Math.floor(Math.random() * 4 + 1000)}`
-        return this.companyRepository.update({companyId: company.companyId}, company)
+        this.companyRepository.update({companyId: company.companyId}, company)
+        return this.findCompanyByIdCompany(company.companyId)
     }
 }
 
