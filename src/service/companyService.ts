@@ -46,8 +46,8 @@ class CompanyService {
                    where email = '${email}'`
         return await this.companyRepository.query(sql);
     }
+
     findCompanyById = async (id) => {
-        console.log(id, "id")
         let sql = `select *
                    from company
                    where companyId = ${id}`

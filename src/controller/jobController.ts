@@ -64,7 +64,7 @@ class JobController {
             })
         }
     }
-    findJobById = async (req: Request, res: Response) => {
+    findJobByCompanyId = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.findJobByCompanyId(req.params.id)
             return res.status(200).json(job)
