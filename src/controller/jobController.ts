@@ -11,7 +11,6 @@ class JobController {
     getAll = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.findAll()
-            console.log(job)
             return res.status(200).json({job: job})
         } catch (e) {
             res.json({
@@ -20,12 +19,12 @@ class JobController {
         }
     }
     add = async (req: Request, res: Response) => {
-
         try {
             let job = await this.jobService.addJob(req.body)
             res.status(200).json(job)
         } catch (e) {
             res.json({
+                abc:"abc",
                 mess: e.message
             })
         }
@@ -33,20 +32,19 @@ class JobController {
     edit = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.editJob(req.params.id, req.body)
+            console.log(job)
             res.status(200).json({
                 job,
                 mess: "ok"
             })
         } catch (e) {
-            res.json({
-                mess: e.message
-            })
+            console.log(e)
         }
     }
     delete = async (req: Request, res: Response) => {
         try {
-            await this.jobService.deleteJob(req.params.id)
-            res.status(200).json({message: 'delete success'})
+            let jobs = await this.jobService.deleteJob(req.params.id)
+            res.status(200).json({jobs, message: 'delete success'})
         } catch (e) {
             res.json({
                 mess: e.message
@@ -64,11 +62,20 @@ class JobController {
             })
         }
     }
-    findJobById = async (req: Request, res: Response) => {
+    findJobByCompanyId = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.findJobByCompanyId(req.params.id)
             return res.status(200).json(job)
         } catch (e) {
+            res.json({
+                mess: e.message
+            })
+        }
+    }
+    findJobById = async  (req: Request, res: Response) =>{
+        try {
+            let job = await this.jobService.findJobById(req.params.id)
+        }catch (e){
             res.json({
                 mess: e.message
             })

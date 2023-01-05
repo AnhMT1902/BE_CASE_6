@@ -20,8 +20,8 @@ export class Job {
     @Column({type: "int"})
     public wageEnd: number;
 
-    @Column({type: "text"})
-    public addressWork: string;
+    @Column({type: "int"})
+    public addressWork: number;
     @Column({type: "varchar"})//vị trí tuyển dụng
     public vacancies: string;
     @Column({type: "varchar"})
