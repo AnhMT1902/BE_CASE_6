@@ -106,6 +106,7 @@ export class JobService {
     }
 
     findJobByCompanyId = async (id) => {
+        console.log(id)
         let query = `select *
                      from job
                               join category c on job.categoryId = c.categoryId
