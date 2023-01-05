@@ -1,9 +1,12 @@
 import {Request, Response} from "express";
 import CompanyService from "../service/companyService";
-import companyService from "../service/companyService";
 import nodemailer from 'nodemailer';
 
 class CompanyController {
+
+
+    constructor() {
+    }
 
     loginCompany = async (req: Request, res: Response) => {
         try {
@@ -91,10 +94,20 @@ class CompanyController {
     }
     findCompanyById = async (req: Request, res: Response) => {
         let id = +req.params.companyId
-        let companyFind = await companyService.findCompanyById(id)
+        let companyFind = await CompanyService.findCompanyById(id)
         return res.status(200).json({
             companyFind: companyFind
         })
+    }
+    getAll = async (req: Request, res: Response) => {
+        try {
+            let company = await CompanyService.findAll()
+            return res.status(200).json({company: company})
+        }catch (e){
+            res.json({
+                mess: e.message
+            })
+        }
     }
 }
 

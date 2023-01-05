@@ -54,6 +54,15 @@ class CompanyService {
         console.log(sql)
         return await this.companyRepository.query(sql);
     }
+    findAll = async () => {
+        let sql = `select *
+                   from job
+                            join category c on job.categoryId = c.categoryId
+                            join company c2 on job.companyId = c2.companyId
+                   group by jobId
+                   order by jobId`
+        return await this.companyRepository.query(sql)
+    }
 
     registerCompany = async (company) => {
         let companyRegister = new Company()

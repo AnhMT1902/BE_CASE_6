@@ -74,6 +74,15 @@ class JobController {
             })
         }
     }
+    findJobById = async  (req: Request, res: Response) =>{
+        try {
+            let job = await this.jobService.findJobById(req.params.id)
+        }catch (e){
+            res.json({
+                mess: e.message
+            })
+        }
+    }
 
     editStatusJobById = async (req: Request, res: Response) => {
         try {
