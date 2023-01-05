@@ -6,7 +6,7 @@ class CategoryService {
     constructor() {
         this.categoryRepository = AppDataSource.getRepository(Category)
     }
-    getAllCompany = async () => {
+    getAllCategory = async () => {
         return await this.categoryRepository.find()
     }
 }
