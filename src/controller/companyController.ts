@@ -96,6 +96,17 @@ class CompanyController {
             companyFind: companyFind
         })
     }
+    getAll = async (req: Request, res: Response) => {
+        try {
+            let company = await companyService.findAll()
+            console.log(company)
+            return res.status(200).json({company: company})
+        } catch (e) {
+            res.json({
+                mess: e.message
+            })
+        }
+    }
 }
 
 

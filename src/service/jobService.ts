@@ -8,7 +8,6 @@ export class JobService {
     constructor() {
         this.jobRepository = AppDataSource.getRepository(Job)
     }
-
     findAll = async () => {
         let sql = `select *
                    from job
@@ -18,6 +17,7 @@ export class JobService {
                    order by jobId`
         return await this.jobRepository.query(sql)
     }
+
 
     addJob = async (data) => {
         let dataValidator = new Job()
@@ -46,7 +46,7 @@ export class JobService {
     editJob = async (id, data) => {
         console.log(id)
         await this.jobRepository.update({jobId: id}, data)
-        return this.findJobById(data.companyId)
+        return this.findJobByCompanyId(data.companyId)
     }
 
     deleteJob = async (id) => {
@@ -56,17 +56,19 @@ export class JobService {
         await this.jobRepository.query(query)
     }
 
-    queryToString(query) {
+    objectToString(ojb) {
         let str = ''
-        for (const key in query) {
+        for (const key in ojb) {
             if (key === 'key') {
-                str += `(company.name  like '${query[key]}' or job.title like '%${query[key]}%') and `
+                str += `(company.name  like '${ojb[key]}' or job.title like '%${ojb[key]}%') and `
             } else {
-                if (typeof query[key] === "string") {
-                    str += `job.${key} like '${query[key]}' and `
+                let arrValue = ojb[key].split(',')
+                console.log(arrValue)
+                if (arrValue.length <= 1) {
+                    str += `job.${key} like '${ojb[key]}' and `
                 } else {
-                    query[key].forEach((item, index) => {
-                        if (index === query[key].length - 1) {
+                    arrValue.forEach((item, index) => {
+                        if (index === arrValue.length - 1) {
                             str += `job.${key} like '${item}') and `
                         } else if (index === 0) {
                             str += `(job.${key} like '${item}' or `
@@ -80,22 +82,25 @@ export class JobService {
         return str.substring(0, str.length - 4)
     }
 
-    searchJob = async (query) => {
-        let condition = this.queryToString(query)
+    searchJob = async (ojb) => {
+        console.log(ojb)
+        let condition = this.objectToString(ojb)
         let sql = `select *
                    from job
                             join category on job.categoryId = category.categoryId
                             join company on job.companyId = company.companyId
                    where ${condition}
                    group by jobId`
+        console.log(sql)
         return await this.jobRepository.query(sql)
     }
 
-    findJobById = async (id) => {
+    findJobByCompanyId = async (id) => {
         let query = `select *
                      from job
                               join category c on job.categoryId = c.categoryId
-                     where companyId = ${id}
+                              join company c2 on job.companyId = c2.companyId
+                     where c2.companyId = ${id}
                      group by jobId`
         return await this.jobRepository.query(query)
     }
@@ -116,7 +121,7 @@ export class JobService {
         } else {
             await this.setStatusJob(id, 0)
         }
-        return await this.findJobById(job[0].companyId)
+        return await this.findJobByCompanyId(job[0].companyId)
     }
 }
 

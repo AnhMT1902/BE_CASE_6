@@ -29,9 +29,9 @@ export class Company {
     })
     public description: string;
     @Column({
-        nullable: true, type: "text"
+        nullable: true, type: "int"
     })
-    public address: string;
+    public address: number;
     @Column({
         nullable: true, type: "int"
     })
