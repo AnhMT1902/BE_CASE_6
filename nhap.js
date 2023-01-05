@@ -2,7 +2,17 @@ function queryToString(query) {
     let str = ''
     for (const key in query) {
         if (key === 'key') {
-            str += `(company.name  like '${query[key]}' or job.title like '%${query[key]}%') and `
+            let arrKey = query[key].split('+')
+            str += `(company.name  like '${arrKey.join(' ')}' or `
+            let res = ''
+            arrKey.map((value, index) => {
+                res += value
+                if (index === arrKey.length - 1) {
+                    str += `company.name like ${res}%) and `
+                } else {
+                    str += `company.name  like '${res}%' or `
+                }
+            })
         } else {
             let arrValue = query[key].split(',')
             console.log(arrValue)
@@ -25,8 +35,5 @@ function queryToString(query) {
 }
 
 console.log(queryToString({
-        country: 'VN',
-        locationName: 'Vietnam',
-        jobTypes: 'INTERNSHIP,FULL_TIME'
-    }
-))
+    country: 'VN', locationName: 'Vietnam', jobTypes: 'INTERNSHIP,FULL_TIME'
+}))

@@ -13,6 +13,7 @@ export class JobService {
         let sql = `select *
                    from job
                             join category c on job.categoryId = c.categoryId
+                            join city on city.cityId = job.addressWork
                    group by jobId
                    order by jobId`
         return await this.jobRepository.query(sql)
@@ -43,7 +44,6 @@ export class JobService {
     }
 
     editJob = async (id, data) => {
-
         await this.jobRepository.update({jobId: id}, data)
         return this.findJobByCompanyId(data.companyId)
     }
@@ -55,16 +55,26 @@ export class JobService {
         await this.jobRepository.query(query)
     }
 
-    objectToString(ojb) {
+    objectToString(query) {
         let str = ''
-        for (const key in ojb) {
+        for (const key in query) {
             if (key === 'key') {
-                str += `(company.name  like '${ojb[key]}' or job.title like '%${ojb[key]}%') and `
+                console.log(query[key], "key")
+                let arrKey = query[key].split(' ')
+                str += `(job.title  like '${query[key]}' or `
+                let res = ''
+                arrKey.map((value, index) => {
+                    res += `${value} `
+                    if (index === arrKey.length - 1) {
+                        str += `job.title like '${res}%') and `
+                    } else {
+                        str += `job.title  like '${res}%' or `
+                    }
+                })
             } else {
-                let arrValue = ojb[key].split(',')
-                console.log(arrValue)
-                if (arrValue.length <= 1) {
-                    str += `job.${key} like '${ojb[key]}' and `
+                let arrValue = query[key].split(',')
+                if (arrValue.length === 1) {
+                    str += `job.${key} like '${query[key]}' and `
                 } else {
                     arrValue.forEach((item, index) => {
                         if (index === arrValue.length - 1) {
@@ -82,12 +92,12 @@ export class JobService {
     }
 
     searchJob = async (ojb) => {
-        console.log(ojb)
         let condition = this.objectToString(ojb)
         let sql = `select *
                    from job
                             join category on job.categoryId = category.categoryId
                             join company on job.companyId = company.companyId
+                            join city on city.cityId = job.addressWork
                    where ${condition}
                    group by jobId`
         console.log(sql)
@@ -99,6 +109,7 @@ export class JobService {
                      from job
                               join category c on job.categoryId = c.categoryId
                               join company c2 on job.companyId = c2.companyId
+                              join city on city.cityId = job.addressWork
                      where c2.companyId = ${id}
                      group by jobId`
         return await this.jobRepository.query(query)
