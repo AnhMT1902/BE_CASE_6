@@ -45,7 +45,8 @@ class CompanyController {
             return res.status(200).json(companyFind)
         } catch (e) {
             res.json({
-                mess: e.message
+                mess: e.message,
+                message: "lỗi"
             })
         }
     }
@@ -85,7 +86,6 @@ class CompanyController {
     }
     randomPassword = async () => {
         let str = `qwpc89vbnerag6h7styu234iodfjklzxm150`
-        console.log(str.length)
         let password = ''
         while (password.length <= 8) {
             password += str[Math.floor(Math.random() * 36)]

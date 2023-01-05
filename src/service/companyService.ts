@@ -51,7 +51,6 @@ class CompanyService {
         let sql = `select *
                    from company
                    where companyId = ${id}`
-        console.log(sql)
         return await this.companyRepository.query(sql);
     }
     findAll = async () => {
@@ -97,9 +96,21 @@ class CompanyService {
             }
         });
     }
-    updateCompany = (company) => {
+
+    findCompanyByIdCompany = async (id) => {
+        console.log(id, 'id')
+        let sql = `select *
+                   from company
+                            join city on city.cityId = company.address
+                   where companyId = '${id}'`
+        return await this.companyRepository.query(sql);
+    }
+
+    updateCompany = async (company) => {
         company.companyCode = `${company.abbreviatedName.substring(0, 3)}${+company.companyId - 1}${Math.floor(Math.random() * 4 + 1000)}`
-        return this.companyRepository.update({companyId: company.companyId}, company)
+        console.log(company, "company")
+        this.companyRepository.update({companyId: company.companyId}, company)
+        return await this.findCompanyByIdCompany(company.companyId)
     }
 }
 
