@@ -98,7 +98,8 @@ export class JobService {
         let query = `select *
                      from job
                               join category c on job.categoryId = c.categoryId
-                     where companyId = ${id}
+                              join company c2 on job.companyId = c2.companyId
+                     where c2.companyId = ${id}
                      group by jobId`
         return await this.jobRepository.query(query)
     }
