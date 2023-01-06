@@ -31,7 +31,7 @@ export class JobService {
         dataValidator.experience = data.experience
         dataValidator.status = data.status
         dataValidator.endDate = data.endDate
-        dataValidator.description = data.description
+        dataValidator.jobDescription = data.jobDescription
         dataValidator.applicants = data.applicants
 
         return await validate(dataValidator).then(async (error) => {
@@ -106,20 +106,19 @@ export class JobService {
     }
 
     findJobByCompanyId = async (id) => {
-        console.log(id)
         let query = `select *
-                     from job
-                              join category c on job.categoryId = c.categoryId
-                              join company c2 on job.companyId = c2.companyId
-                              join city on city.cityId = job.addressWork
-                     where c2.companyId = ${id}
-                     group by jobId`
+                     from company
+                              join job on job.companyId = company.companyId
+                              join category on job.categoryId = category.categoryId
+                              join city on company.address = cityId where company.companyId = ${id}`
         return await this.jobRepository.query(query)
     }
 
     findJobById = async (id) => {
         let query = `select *
                      from job
+                              join company c on job.companyId = c.companyId
+                              join city on cityId = addressWork
                      where jobId = ${id}`
         return await this.jobRepository.query(query)
     }

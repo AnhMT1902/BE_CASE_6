@@ -35,7 +35,7 @@ export class Job {
     public endDate: string;
     @IsNotEmpty()
     @Column({type: "text"})
-    public description: string;
+    public jobDescription: string;
     @Column({nullable: true, type: "text"})
     public codeJob: string; // CODE+ mã cty+ id job
     @Column({type: "int"})

@@ -9,5 +9,5 @@ JobRouter.put('/:id',JobController.edit)
 JobRouter.delete('/:id',jobController.delete)
 JobRouter.get('/search',jobController.search)
 JobRouter.put('/status/:id',JobController.editStatusJobById)
-JobRouter.get('/company-job/:id',JobController.findJobByCompanyId)
-
+JobRouter.get('/company-job/:id',JobController.findJobByCompanyId);
+JobRouter.get('/detail/:id',JobController.findJobById);
