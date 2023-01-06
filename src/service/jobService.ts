@@ -14,6 +14,7 @@ export class JobService {
                    from job
                             join category c on job.categoryId = c.categoryId
                             join city on city.cityId = job.addressWork
+                   where job.status = 0
                    group by jobId
                    order by jobId`
         return await this.jobRepository.query(sql)
@@ -62,14 +63,12 @@ export class JobService {
             if (key === 'key') {
                 console.log(query[key], "key")
                 let arrKey = query[key].split(' ')
-                str += `(job.title  like '${query[key]}' or `
-                let res = ''
+                str += `(job.title like '${query[key]}' or `
                 arrKey.map((value, index) => {
-                    res += `${value} `
                     if (index === arrKey.length - 1) {
-                        str += `job.title like '${res}%') and `
+                        str += `job.title like '%${value}%') and `
                     } else {
-                        str += `job.title  like '${res}%' or `
+                        str += `job.title like '%${value}%' or `
                     }
                 })
             } else {
@@ -99,8 +98,13 @@ export class JobService {
                             join category on job.categoryId = category.categoryId
                             join company on job.companyId = company.companyId
                             join city on city.cityId = job.addressWork
-                   where ${condition}
+                   where ${condition || "1=1"} and job.status = 0
                    group by jobId`
+        try {
+            await this.jobRepository.query(sql)
+        } catch (e) {
+            console.log(e)
+        }
         console.log(sql)
         return await this.jobRepository.query(sql)
     }

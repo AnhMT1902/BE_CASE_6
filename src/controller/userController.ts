@@ -7,7 +7,9 @@ class UserController {
         try {
             let user = req.body;
             let userFind = await userService.registerUser(user);
-            await this.sendMailForUser(req, res, user.email);
+            if (userFind.checkRegister) {
+                await this.sendMailForUser(req, res, user.email);
+            }
             return res.status(200).json(userFind);
         } catch (e) {
             res.json({
