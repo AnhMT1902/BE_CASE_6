@@ -50,17 +50,35 @@ class CompanyService {
     findCompanyById = async (id) => {
         let sql = `select *
                    from company
-                   where companyId = ${id}`
+                            join job on company.companyId = job.companyId
+                            join city on address = cityId
+                   where company.companyId = ${id} group by company.companyId;`
         return await this.companyRepository.query(sql);
     }
     findAll = async () => {
         let sql = `select *
-                   from job
-                            join category c on job.categoryId = c.categoryId
-                            join company c2 on job.companyId = c2.companyId
-                   group by jobId
-                   order by jobId`
+                   from company
+                            join city on company.address = city.cityId
+                   group by companyId`
         return await this.companyRepository.query(sql)
+    }
+
+    searchCompany = async (name) => {
+        let company = `select *
+                       from company
+                       where company.name like '%${name}%'`
+        return await this.companyRepository.query(company)
+
+    }
+    searchTopCompanies = async () => {
+        let companies = `select *, SUM(applicants) as total
+                         from company
+                                  join job j on company.companyId = j.companyId
+                                  join city on address = cityId
+                         group by j.companyId
+                         order by total desc limit 10;
+        `
+        return await this.companyRepository.query(companies)
     }
 
     registerCompany = async (company) => {
@@ -102,7 +120,7 @@ class CompanyService {
         let sql = `select *
                    from company
                             join city on city.cityId = company.address
-                   where companyId = '${id}'`
+                   where companyId = ${id}`
         return await this.companyRepository.query(sql);
     }
 
