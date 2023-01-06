@@ -1,12 +1,9 @@
 import {Request, Response} from "express";
 import CompanyService from "../service/companyService";
+import companyService from "../service/companyService";
 import nodemailer from 'nodemailer';
 
 class CompanyController {
-
-
-    constructor() {
-    }
 
     loginCompany = async (req: Request, res: Response) => {
         try {
@@ -45,8 +42,7 @@ class CompanyController {
             return res.status(200).json(companyFind)
         } catch (e) {
             res.json({
-                mess: e.message,
-                message: "lỗi"
+                mess: e.message
             })
         }
     }
@@ -86,6 +82,7 @@ class CompanyController {
     }
     randomPassword = async () => {
         let str = `qwpc89vbnerag6h7styu234iodfjklzxm150`
+        console.log(str.length)
         let password = ''
         while (password.length <= 8) {
             password += str[Math.floor(Math.random() * 36)]
@@ -94,7 +91,7 @@ class CompanyController {
     }
     findCompanyById = async (req: Request, res: Response) => {
         let id = +req.params.companyId
-        let companyFind = await CompanyService.findCompanyById(id)
+        let companyFind = await companyService.findCompanyById(id)
         return res.status(200).json({
             companyFind: companyFind
         })

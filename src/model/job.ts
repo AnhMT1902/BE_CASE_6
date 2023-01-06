@@ -26,20 +26,16 @@ export class Job {
     public vacancies: string;
     @Column({type: "varchar"})
     public experience: string;
-F
-
     @IsNotEmpty()
     @Column({type: "int"})
     public status: number;
-
-
     @Column({nullable: true, type: "int"})
-    public statusTime: number;// full time, parttime (0 :full time ; 1 :part time)
+    public statusTime: number;// full time, part time (0 :full time ; 1 :part time)
     @Column({type: "varchar"})
     public endDate: string;
     @IsNotEmpty()
     @Column({type: "text"})
-    public description: string;
+    public jobDescription: string;
     @Column({nullable: true, type: "text"})
     public codeJob: string; // CODE+ mã cty+ id job
     @Column({type: "int"})

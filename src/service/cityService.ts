@@ -9,7 +9,9 @@ class CityService {
     }
 
     getAllCity = async () => {
-        return await this.cityRepository.find()
+        let sql = `select *
+                   from city`
+        return await this.cityRepository.query(sql)
     }
 }
 

@@ -14,11 +14,13 @@ export class JobService {
                    from job
                             join category c on job.categoryId = c.categoryId
                             join city on city.cityId = job.addressWork
-                   where job.status = 0
+                            join company c2 on job.companyId = c2.companyId
+                   where status = 0
                    group by jobId
                    order by jobId`
         return await this.jobRepository.query(sql)
     }
+
 
     addJob = async (data) => {
         let dataValidator = new Job()
@@ -30,7 +32,7 @@ export class JobService {
         dataValidator.experience = data.experience
         dataValidator.status = data.status
         dataValidator.endDate = data.endDate
-        dataValidator.description = data.description
+        dataValidator.jobDescription = data.jobDescription
         dataValidator.applicants = data.applicants
 
         return await validate(dataValidator).then(async (error) => {
@@ -61,7 +63,6 @@ export class JobService {
         let str = ''
         for (const key in query) {
             if (key === 'key') {
-                console.log(query[key], "key")
                 let arrKey = query[key].split(' ')
                 str += `(job.title like '${query[key]}' or `
                 arrKey.map((value, index) => {
@@ -100,12 +101,6 @@ export class JobService {
                             join city on city.cityId = job.addressWork
                    where ${condition || "1=1"} and job.status = 0
                    group by jobId`
-        try {
-            await this.jobRepository.query(sql)
-        } catch (e) {
-            console.log(e)
-        }
-        console.log(sql)
         return await this.jobRepository.query(sql)
     }
 
@@ -117,6 +112,15 @@ export class JobService {
                               join city on city.cityId = job.addressWork
                      where c2.companyId = ${id}
                      group by jobId`
+        return await this.jobRepository.query(query)
+    }
+
+    findJobById = async (id) => {
+        let query = `select *
+                     from job
+                              join company c on job.companyId = c.companyId
+                              join city on cityId = addressWork
+                     where jobId = ${id}`
         return await this.jobRepository.query(query)
     }
     setStatusJob = async (jobId, status) => {
