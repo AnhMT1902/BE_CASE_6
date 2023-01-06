@@ -25,6 +25,7 @@ class JobController {
             res.status(200).json(job)
         } catch (e) {
             res.json({
+                abc:"abc",
                 mess: e.message
             })
         }
@@ -32,14 +33,13 @@ class JobController {
     edit = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.editJob(req.params.id, req.body)
+            console.log(job)
             res.status(200).json({
                 job,
                 mess: "ok"
             })
         } catch (e) {
-            res.json({
-                mess: e.message
-            })
+            console.log(e)
         }
     }
     delete = async (req: Request, res: Response) => {
@@ -64,11 +64,20 @@ class JobController {
             })
         }
     }
-    findJobById = async (req: Request, res: Response) => {
+    findJobByCompanyId = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.findJobByCompanyId(req.params.id)
             return res.status(200).json(job)
         } catch (e) {
+            res.json({
+                mess: e.message
+            })
+        }
+    }
+    findJobById = async  (req: Request, res: Response) =>{
+        try {
+            let job = await this.jobService.findJobById(req.params.id)
+        }catch (e){
             res.json({
                 mess: e.message
             })
