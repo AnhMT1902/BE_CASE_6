@@ -12,9 +12,9 @@ export class JobService {
     findAll = async () => {
         let sql = `select *
                    from job
-                            join category c on job.categoryId = c.categoryId
-                            join city on city.cityId = job.addressWork
-                            join company c2 on job.companyId = c2.companyId
+                            join category on category.categoryId = job.categoryId
+                            join company on job.companyId = company.companyId
+                            join city on company.address = city.cityId
                    where status = 0
                    group by jobId
                    order by jobId`
@@ -107,20 +107,22 @@ export class JobService {
     findJobByCompanyId = async (id) => {
         let query = `select *
                      from job
-                              join category c on job.categoryId = c.categoryId
-                              join company c2 on job.companyId = c2.companyId
-                              join city on city.cityId = job.addressWork
-                     where c2.companyId = ${id}
-                     group by jobId`
+                              join category on category.categoryId = job.categoryId
+                              join company on job.companyId = company.companyId
+                              join city on company.address = city.cityId
+                     where company.companyId = ${id}
+                     group by jobId
+                     order by jobId`
         return await this.jobRepository.query(query)
     }
 
     findJobById = async (id) => {
         let query = `select *
                      from job
-                              join company c on job.companyId = c.companyId
-                              join city on cityId = addressWork
-                     where jobId = ${id}`
+                              join category on category.categoryId = job.categoryId
+                              join company on job.companyId = company.companyId
+                              join city on company.address = city.cityId
+                     where job.jobId = ${id}`
         return await this.jobRepository.query(query)
     }
     setStatusJob = async (jobId, status) => {

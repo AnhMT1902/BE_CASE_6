@@ -25,7 +25,7 @@ class JobController {
             res.status(200).json(job)
         } catch (e) {
             res.json({
-                abc:"abc",
+                abc: "abc",
                 mess: e.message
             })
         }
@@ -74,11 +74,11 @@ class JobController {
             })
         }
     }
-    findJobById = async  (req: Request, res: Response) =>{
+    findJobById = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.findJobById(req.params.id)
             return res.status(200).json(job)
-        }catch (e){
+        } catch (e) {
             res.json({
                 mess: e.message
             })
