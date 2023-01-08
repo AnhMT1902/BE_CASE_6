@@ -11,6 +11,7 @@ class JobController {
     getAll = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.findAll()
+            console.log(job)
             return res.status(200).json({job: job})
         } catch (e) {
             res.json({
@@ -55,6 +56,7 @@ class JobController {
     search = async (req: Request, res: Response) => {
         try {
             let query = req.query
+            console.log(query, "abc");
             let job = await this.jobService.searchJob(query)
             return res.status(200).json(job)
         } catch (e) {
@@ -76,6 +78,7 @@ class JobController {
     findJobById = async  (req: Request, res: Response) =>{
         try {
             let job = await this.jobService.findJobById(req.params.id)
+            return res.status(200).json(job)
         }catch (e){
             res.json({
                 mess: e.message

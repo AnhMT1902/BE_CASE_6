@@ -1,12 +1,9 @@
 import {Request, Response} from "express";
 import CompanyService from "../service/companyService";
+import companyService from "../service/companyService";
 import nodemailer from 'nodemailer';
 
 class CompanyController {
-
-
-    constructor() {
-    }
 
     loginCompany = async (req: Request, res: Response) => {
         try {
@@ -45,8 +42,7 @@ class CompanyController {
             return res.status(200).json(companyFind)
         } catch (e) {
             res.json({
-                mess: e.message,
-                message: "lỗi"
+                mess: e.message
             })
         }
     }
@@ -73,7 +69,6 @@ class CompanyController {
         }
         transporter.sendMail(mainOptions, function (err, info) {
             if (err) {
-                console.log(err);
                 return res.status(200).json({
                     message: `mess, Lỗi gửi mail:  + ${err}`
                 })
@@ -94,7 +89,7 @@ class CompanyController {
     }
     findCompanyById = async (req: Request, res: Response) => {
         let id = +req.params.companyId
-        let companyFind = await CompanyService.findCompanyById(id)
+        let companyFind = await companyService.findCompanyById(id)
         return res.status(200).json({
             companyFind: companyFind
         })
