@@ -50,7 +50,7 @@ class CompanyService {
     findCompanyById = async (id) => {
         let sql = `select *
                    from company
-                            join city on company.address = city.cityId join job on job.jobId=company.companyId
+                            join city on company.address = city.cityId
                    where company.companyId = ${id}`
         return await this.companyRepository.query(sql);
     }
