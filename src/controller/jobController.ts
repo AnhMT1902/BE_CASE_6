@@ -54,7 +54,6 @@ class JobController {
         try {
             let query = req.query
             let job = await this.jobService.searchJob(query)
-            console.log(job)
             return res.status(200).json(job)
         } catch (e) {
             res.json({
