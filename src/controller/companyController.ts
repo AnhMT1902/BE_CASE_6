@@ -37,6 +37,7 @@ class CompanyController {
     updateCompany = async (req: Request, res: Response) => {
         try {
             let companyEdit = req.body
+            console.log(req.body)
             companyEdit.companyId = +req.params.companyId
             let companyFind = await CompanyService.updateCompany(companyEdit);
             return res.status(200).json(companyFind)

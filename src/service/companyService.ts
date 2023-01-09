@@ -3,6 +3,7 @@ import {Company} from "../model/company";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 import {validate} from "class-validator";
+import cityService from "./cityService";
 
 class CompanyService {
     private companyRepository: any
