@@ -50,10 +50,36 @@ class CompanyService {
     findCompanyById = async (id) => {
         let sql = `select *
                    from company
-                   where companyId = ${id}`
+                            join job on company.companyId = job.companyId
+                            join city on address = cityId
+                   where company.companyId = ${id} group by company.companyId;`
         return await this.companyRepository.query(sql);
     }
+    findAll = async () => {
+        let sql = `select *
+                   from company
+                            join city on company.address = city.cityId
+                   group by companyId`
+        return await this.companyRepository.query(sql)
+    }
 
+    searchCompany = async (name) => {
+        let company = `select *
+                       from company
+                       where company.name like '%${name}%'`
+        return await this.companyRepository.query(company)
+
+    }
+    searchTopCompanies = async () => {
+        let companies = `select *, SUM(applicants) as total
+                         from company
+                                  join job j on company.companyId = j.companyId
+                                  join city on address = cityId
+                         group by j.companyId
+                         order by total desc limit 10;
+        `
+        return await this.companyRepository.query(companies)
+    }
 
     registerCompany = async (company) => {
         let companyRegister = new Company()
@@ -90,11 +116,10 @@ class CompanyService {
     }
 
     findCompanyByIdCompany = async (id) => {
-        console.log(id, 'id')
         let sql = `select *
                    from company
                             join city on city.cityId = company.address
-                   where companyId = '${id}'`
+                   where companyId = ${id}`
         return await this.companyRepository.query(sql);
     }
 
@@ -103,11 +128,6 @@ class CompanyService {
         console.log(company, "company")
         this.companyRepository.update({companyId: company.companyId}, company)
         return await this.findCompanyByIdCompany(company.companyId)
-    }
-    findAll = async () => {
-        let sql = `select * from company join city on company.address = city.cityId
-                   group by companyId `
-        return await this.companyRepository.query(sql)
     }
 }
 

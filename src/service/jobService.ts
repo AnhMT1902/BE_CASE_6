@@ -41,6 +41,7 @@ export class JobService {
                     message: "validate fail"
                 }
             } else {
+                console.log(data)
                 return await this.jobRepository.save(data)
             }
         })

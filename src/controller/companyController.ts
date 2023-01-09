@@ -100,6 +100,27 @@ class CompanyController {
         try {
             let company = await CompanyService.findAll()
             return res.status(200).json({company: company})
+        } catch (e) {
+            res.json({
+                mess: e.message
+            })
+        }
+    }
+    search = async (req: Request, res: Response) => {
+        try {
+            let query = req.body.name
+            let company = await CompanyService.searchCompany(query)
+            return res.status(200).json({company: company})
+        } catch (e) {
+            res.json({
+                mess: e.message
+            })
+        }
+    }
+    searchTopCompany = async (req: Request, res: Response) => {
+        try {
+            let topCompany = await CompanyService.searchTopCompanies()
+            return res.status(200).json({company: topCompany})
         }catch (e){
             res.json({
                 mess: e.message
