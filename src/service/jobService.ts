@@ -41,7 +41,6 @@ export class JobService {
                     message: "validate fail"
                 }
             } else {
-                console.log(data)
                 return await this.jobRepository.save(data)
             }
         })
@@ -73,7 +72,7 @@ export class JobService {
                         str += `job.title like '%${value}%' or `
                     }
                 })
-            } else if (key === "addressWork") {
+            } else if (key === "address") {
                 let arrKey = query[key].split(',')
                 if (arrKey.length === 1) {
                     str += `company.address like ${arrKey[0]} and `
@@ -91,9 +90,6 @@ export class JobService {
                     })
                     str += res
                 }
-            } else if (key === 'wage') {
-                let arrWage = query[key].split(',')
-                str+= `((job.wageStart between ${arrWage[0]} and ${arrWage[1]}) or (job.wageEnd between ${arrWage[0]} and ${arrWage[1]})) and `
             } else {
                 let arrValue = query[key].split(',')
                 if (arrValue.length === 1) {
@@ -115,7 +111,6 @@ export class JobService {
     }
 
     searchJob = async (ojb) => {
-        console.log(ojb)
         let condition = this.objectToString(ojb)
         let sql = `select *
                    from job
@@ -125,7 +120,6 @@ export class JobService {
                    where ${condition || "1=1"}
                      and job.status = 0
                    group by jobId`
-        console.log(sql)
         return await this.jobRepository.query(sql)
     }
 

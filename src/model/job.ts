@@ -24,8 +24,8 @@ export class Job {
     public addressWork: string;
     @Column({type: "varchar"})//vị trí tuyển dụng
     public vacancies: string;
-    @Column({type: "varchar"})
-    public experience: string;
+    @Column({type: "int"})
+    public experience: number;
     @IsNotEmpty()
     @Column({type: "int"})
     public status: number;
