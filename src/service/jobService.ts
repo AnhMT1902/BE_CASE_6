@@ -108,13 +108,11 @@ export class JobService {
                 }
             }
         }
-        console.log(str)
         return str.substring(0, str.length - 4)
     }
 
     searchJob = async (ojb) => {
         let condition = this.objectToString(ojb)
-        console.log(condition)
         let sql = `select *
                    from job
                             join category on category.categoryId = job.categoryId
