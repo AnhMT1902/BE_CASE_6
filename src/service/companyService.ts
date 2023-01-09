@@ -49,7 +49,8 @@ class CompanyService {
 
     findCompanyById = async (id) => {
         let sql = `select *
-                   from company join city on company.address =city.cityId
+                   from company
+                            join city on company.address = city.cityId
                    where companyId = ${id}`
         return await this.companyRepository.query(sql);
     }
@@ -90,11 +91,10 @@ class CompanyService {
     }
 
     findCompanyByIdCompany = async (id) => {
-        console.log(id, 'id')
         let sql = `select *
                    from company
                             join city on city.cityId = company.address
-                   where companyId = '${id}'`
+                   where companyId = ${id}`
         return await this.companyRepository.query(sql);
     }
 
@@ -104,7 +104,9 @@ class CompanyService {
         return await this.findCompanyByIdCompany(company.companyId)
     }
     findAll = async () => {
-        let sql = `select * from company join city on company.address = city.cityId
+        let sql = `select *
+                   from company
+                            join city on company.address = city.cityId
                    group by companyId `
         return await this.companyRepository.query(sql)
     }

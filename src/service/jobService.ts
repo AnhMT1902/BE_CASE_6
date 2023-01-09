@@ -72,6 +72,25 @@ export class JobService {
                         str += `job.title like '%${value}%' or `
                     }
                 })
+            } else if (key === "address") {
+                let arrKey = query[key].split(',')
+                console.log(arrKey)
+                if (arrKey.length === 1) {
+                    str += `company.address like ${arrKey[0]} and `
+                } else {
+                    let res = ''
+                    arrKey.map((item, index) => {
+                        if (index === 0) {
+                            res += `(company.address like ${item} or `
+                        }
+                        if (index === arrKey.length - 1) {
+                            res += `company.address like ${item}) and `
+                        } else {
+                            res += `company.address like ${item} or `
+                        }
+                    })
+                    str += res
+                }
             } else {
                 let arrValue = query[key].split(',')
                 if (arrValue.length === 1) {
@@ -89,17 +108,20 @@ export class JobService {
                 }
             }
         }
+        console.log(str)
         return str.substring(0, str.length - 4)
     }
 
     searchJob = async (ojb) => {
         let condition = this.objectToString(ojb)
+        console.log(condition)
         let sql = `select *
                    from job
-                            join category on job.categoryId = category.categoryId
+                            join category on category.categoryId = job.categoryId
                             join company on job.companyId = company.companyId
-                            join city on city.cityId = job.addressWork
-                   where ${condition || "1=1"} and job.status = 0
+                            join city on company.address = city.cityId
+                   where ${condition || "1=1"}
+                     and job.status = 0
                    group by jobId`
         return await this.jobRepository.query(sql)
     }
