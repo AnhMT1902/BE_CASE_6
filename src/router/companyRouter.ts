@@ -9,3 +9,4 @@ companyRouter.put('/update/:companyId', CompanyController.updateCompany)
 companyRouter.get('/:companyId', CompanyController.findCompanyById)
 companyRouter.get('',CompanyController.getAll)
 companyRouter.post('/search',CompanyController.search)
+
