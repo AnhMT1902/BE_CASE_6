@@ -50,6 +50,7 @@ class JobController {
             })
         }
     }
+
     search = async (req: Request, res: Response) => {
         try {
             let query = req.query
