@@ -90,6 +90,9 @@ export class JobService {
                     })
                     str += res
                 }
+            } else if (key === 'wage') {
+                let arrKey = query[key].split(',')
+                str += `(wageStart between ${arrKey[0]} AND ${arrKey[1]}) or (wageEnd between ${arrKey[0]} AND ${arrKey[1]}) and `
             } else {
                 let arrValue = query[key].split(',')
                 if (arrValue.length === 1) {
