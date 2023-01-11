@@ -37,7 +37,6 @@ class CompanyController {
     updateCompany = async (req: Request, res: Response) => {
         try {
             let companyEdit = req.body
-            console.log(req.body)
             companyEdit.companyId = +req.params.companyId
             let companyFind = await CompanyService.updateCompany(companyEdit);
             return res.status(200).json(companyFind)
@@ -70,6 +69,7 @@ class CompanyController {
         }
         transporter.sendMail(mainOptions, function (err, info) {
             if (err) {
+                console.log(err);
                 return res.status(200).json({
                     message: `mess, Lỗi gửi mail:  + ${err}`
                 })
@@ -82,12 +82,14 @@ class CompanyController {
     }
     randomPassword = async () => {
         let str = `qwpc89vbnerag6h7styu234iodfjklzxm150`
+        console.log(str.length)
         let password = ''
         while (password.length <= 8) {
             password += str[Math.floor(Math.random() * 36)]
         }
         return password
     }
+
     findCompanyById = async (req: Request, res: Response) => {
         let id = +req.params.companyId
         let companyFind = await companyService.findCompanyById(id)
@@ -95,6 +97,7 @@ class CompanyController {
             companyFind: companyFind
         })
     }
+
     getAll = async (req: Request, res: Response) => {
         try {
             let company = await CompanyService.findAll()
@@ -105,6 +108,7 @@ class CompanyController {
             })
         }
     }
+
     search = async (req: Request, res: Response) => {
         try {
             let query = req.body.name
@@ -116,18 +120,17 @@ class CompanyController {
             })
         }
     }
+
     searchTopCompany = async (req: Request, res: Response) => {
         try {
             let topCompany = await CompanyService.searchTopCompanies()
             return res.status(200).json({company: topCompany})
-        }catch (e){
+        } catch (e) {
             res.json({
                 mess: e.message
             })
         }
     }
-
-
 }
 
 export default new CompanyController();

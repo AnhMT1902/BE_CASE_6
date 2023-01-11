@@ -74,7 +74,6 @@ export class JobService {
                 })
             } else if (key === "address") {
                 let arrKey = query[key].split(',')
-                console.log(arrKey)
                 if (arrKey.length === 1) {
                     str += `company.address like ${arrKey[0]} and `
                 } else {
@@ -91,6 +90,9 @@ export class JobService {
                     })
                     str += res
                 }
+            } else if (key === 'wage') {
+                let arrKey = query[key].split(',')
+                str += `((wageStart between ${arrKey[0]} AND ${arrKey[1]}) or (wageEnd between ${arrKey[0]} AND ${arrKey[1]})) and `
             } else {
                 let arrValue = query[key].split(',')
                 if (arrValue.length === 1) {
@@ -121,6 +123,7 @@ export class JobService {
                    where ${condition || "1=1"}
                      and job.status = 0
                    group by jobId`
+        console.log(sql)
         return await this.jobRepository.query(sql)
     }
 

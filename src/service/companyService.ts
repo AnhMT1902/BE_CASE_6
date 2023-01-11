@@ -3,7 +3,6 @@ import {Company} from "../model/company";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 import {validate} from "class-validator";
-import cityService from "./cityService";
 
 class CompanyService {
     private companyRepository: any
@@ -51,11 +50,17 @@ class CompanyService {
     findCompanyById = async (id) => {
         let sql = `select *
                    from company
-                            join city on company.address = city.cityId
+                            join city on company.address = city.cityId join job on job.jobId=company.companyId
                    where company.companyId = ${id}`
         return await this.companyRepository.query(sql);
     }
-
+    findAll = async () => {
+        let sql = `select *
+                   from company
+                            join city on company.address = city.cityId
+                   group by companyId`
+        return await this.companyRepository.query(sql)
+    }
 
     searchCompany = async (name) => {
         let company = `select *
@@ -110,6 +115,7 @@ class CompanyService {
     }
 
     findCompanyByIdCompany = async (id) => {
+        console.log(id, 'id')
         let sql = `select *
                    from company
                             join city on city.cityId = company.address
@@ -119,16 +125,8 @@ class CompanyService {
 
     updateCompany = async (company) => {
         company.companyCode = `${company.abbreviatedName.substring(0, 3)}${+company.companyId - 1}${Math.floor(Math.random() * 4 + 1000)}`
-        console.log(company, "company")
         this.companyRepository.update({companyId: company.companyId}, company)
         return await this.findCompanyByIdCompany(company.companyId)
-    }
-    findAll = async () => {
-        let sql = `select *
-                   from company
-                            join city on company.address = city.cityId
-                   group by companyId `
-        return await this.companyRepository.query(sql)
     }
 }
 

@@ -18,6 +18,7 @@ class JobController {
             })
         }
     }
+
     add = async (req: Request, res: Response) => {
         try {
             let job = await this.jobService.addJob(req.body)
