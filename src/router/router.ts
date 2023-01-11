@@ -12,5 +12,5 @@ router.use('/user', userRouter);
 router.use('/job', JobRouter);
 router.use('/category', categoryRouter);
 router.use('/city', cityRouter);
-router.use('cv',cvRouter)
+router.use('/cv',cvRouter)
 

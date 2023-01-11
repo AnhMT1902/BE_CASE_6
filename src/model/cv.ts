@@ -6,4 +6,6 @@ export class Cv {
     public readonly cvId: number;
     @Column({type: "text"})
     public image: string;
+    @Column({type: "int"})
+    public userId: number;
 }

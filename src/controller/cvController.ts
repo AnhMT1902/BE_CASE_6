@@ -10,6 +10,14 @@ class CvController {
             return res.status(200).json(err)
         }
     }
+    addCv =  async (req: Request, res: Response) => {
+        try {
+            let cv = await CvService.addCv(req.body)
+            return res.status(200).json(cv)
+        } catch (err) {
+            return res.status(200).json(err)
+        }
+    }
 }
 
 export default new CvController()
