@@ -8,7 +8,7 @@ class CvService {
         this.cvRepository = AppDataSource.getRepository(Cv)
     }
 
-    getCvByCompanyId = async (id) => {
+    getCvByJobId = async (id) => {
         let sql = ``
     }
 

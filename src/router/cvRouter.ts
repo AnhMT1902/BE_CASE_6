@@ -3,4 +3,4 @@ import CvController from "../controller/cvController";
 
 
 export const cvRouter = Router();
-cvRouter.get('',CvController.getCvByCompanyId)
+cvRouter.get('',CvController.getCvByJobId)
