@@ -8,4 +8,6 @@ export class Cv {
     public image: string;
     @Column({type: "int"})
     public userId: number;
+    @Column({type: "varchar"})
+    public cv_des: string;
 }

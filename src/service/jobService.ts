@@ -123,7 +123,6 @@ export class JobService {
                    where ${condition || "1=1"}
                      and job.status = 0
                    group by jobId`
-        console.log(sql)
         return await this.jobRepository.query(sql)
     }
 
