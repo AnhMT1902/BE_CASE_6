@@ -47,6 +47,18 @@ class CompanyController {
         }
     }
 
+
+    updateImageCompany = async (req: Request, res: Response) => {
+        try {
+            let companyFind = await CompanyService.updateImageCompany(req.body.image, req.params.companyId);
+            return res.status(200).json(companyFind)
+        } catch (err) {
+            res.json({
+                mess: err.message
+            })
+        }
+    }
+
     sendMailForCompany = (req, res, password, email, companyFind) => {
         let transporter = nodemailer.createTransport({ // config mail server
             service: 'gmail',

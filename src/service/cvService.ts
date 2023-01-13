@@ -26,7 +26,6 @@ class CvService {
             userId: data.userId,
             cv_des: data.cv_des
         };
-        console.log(newCv)
         await this.cvRepository.save(newCv)
         let sql = `select *
                    from cv

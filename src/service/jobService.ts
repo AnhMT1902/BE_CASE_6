@@ -135,6 +135,7 @@ export class JobService {
                      where company.companyId = ${id}
                      group by jobId
                      order by jobId`
+        console.log(query)
         return await this.jobRepository.query(query)
     }
 

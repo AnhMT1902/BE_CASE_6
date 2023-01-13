@@ -115,12 +115,19 @@ class CompanyService {
     }
 
     findCompanyByIdCompany = async (id) => {
-        console.log(id, 'id')
         let sql = `select *
                    from company
                             join city on city.cityId = company.address
                    where companyId = ${id}`
         return await this.companyRepository.query(sql);
+    }
+
+    updateImageCompany = async (image, id) => {
+        let sql = `update company
+                   set image = "${image}
+"                   where companyId = ${id}`
+        this.companyRepository.query(sql)
+        return await this.findCompanyByIdCompany(id)
     }
 
     updateCompany = async (company) => {

@@ -1,6 +1,7 @@
 import {JobService} from "../service/jobService";
 import {Request, Response} from 'express'
 
+
 class JobController {
     private jobService: JobService
 
