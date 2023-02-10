@@ -21,6 +21,7 @@ class CompanyController {
     registerCompany = async (req: Request, res: Response) => {
         try {
             const password = await this.randomPassword()
+            console.log(password)
             let company = req.body
             company.password = password
             let companyFind = await CompanyService.registerCompany(company);
