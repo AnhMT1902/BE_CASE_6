@@ -1088,278 +1088,363 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="317" parent="295" name="company">
+    <table id="317" parent="295" name="city">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="318" parent="295" name="cv">
+    <table id="318" parent="295" name="company">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="319" parent="295" name="cv_job">
+    <table id="319" parent="295" name="cv">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="320" parent="295" name="job">
+    <table id="320" parent="295" name="cv_job">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="321" parent="295" name="job_category">
+    <table id="321" parent="295" name="job">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="322" parent="295" name="user">
+    <table id="322" parent="295" name="job_category">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="323" parent="295" name="user_company">
+    <table id="323" parent="295" name="user">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="324" parent="316" name="categoryId">
-      <AutoIncrement>1</AutoIncrement>
+    <table id="324" parent="295" name="user_company">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="325" parent="316" name="categoryId">
+      <AutoIncrement>6</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="325" parent="316" name="name">
+    <column id="326" parent="316" name="nameCategory">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="326" parent="316" name="PRIMARY">
+    <index id="327" parent="316" name="PRIMARY">
       <ColNames>categoryId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="327" parent="316" name="PRIMARY">
+    <key id="328" parent="316" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="328" parent="317" name="companyId">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="329" parent="317" name="cityId">
+      <AutoIncrement>64</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="329" parent="317" name="name">
+    <column id="330" parent="317" name="nameCity">
       <DataType>varchar(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <index id="331" parent="317" name="PRIMARY">
+      <ColNames>cityId</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="332" parent="317" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="333" parent="318" name="website">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>1</Position>
+    </column>
+    <column id="334" parent="318" name="companyId">
+      <AutoIncrement>45</AutoIncrement>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="330" parent="317" name="email">
+    <column id="335" parent="318" name="name">
       <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="331" parent="317" name="description">
+    <column id="336" parent="318" name="email">
       <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="332" parent="317" name="image">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="337" parent="318" name="password">
+      <DataType>varchar(255)|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="333" parent="317" name="address">
+    <column id="338" parent="318" name="image">
       <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="334" parent="317" name="numberStaff">
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="339" parent="318" name="description">
+      <DataType>text|0s</DataType>
       <Position>7</Position>
     </column>
-    <column id="335" parent="317" name="linkMap">
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="340" parent="318" name="address">
+      <DataType>int|0s</DataType>
       <Position>8</Position>
     </column>
-    <index id="336" parent="317" name="PRIMARY">
+    <column id="341" parent="318" name="numberStaff">
+      <DataType>int|0s</DataType>
+      <Position>9</Position>
+    </column>
+    <column id="342" parent="318" name="linkMap">
+      <DataType>text|0s</DataType>
+      <Position>10</Position>
+    </column>
+    <column id="343" parent="318" name="companyCode">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>11</Position>
+    </column>
+    <column id="344" parent="318" name="abbreviatedName">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>12</Position>
+    </column>
+    <column id="345" parent="318" name="phoneNumber">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>13</Position>
+    </column>
+    <index id="346" parent="318" name="PRIMARY">
       <ColNames>companyId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="337" parent="317" name="PRIMARY">
+    <key id="347" parent="318" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="338" parent="318" name="cvId">
+    <column id="348" parent="319" name="cvId">
       <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="339" parent="318" name="image">
+    <column id="349" parent="319" name="image">
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="340" parent="318" name="PRIMARY">
+    <column id="350" parent="319" name="userId">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <index id="351" parent="319" name="PRIMARY">
       <ColNames>cvId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="341" parent="318" name="PRIMARY">
+    <key id="352" parent="319" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="342" parent="319" name="cv_jobId">
+    <column id="353" parent="320" name="cv_jobId">
       <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="343" parent="319" name="cvId">
+    <column id="354" parent="320" name="cvId">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="344" parent="319" name="jobId">
+    <column id="355" parent="320" name="jobId">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <index id="345" parent="319" name="PRIMARY">
+    <index id="356" parent="320" name="PRIMARY">
       <ColNames>cv_jobId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="346" parent="319" name="PRIMARY">
+    <key id="357" parent="320" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="347" parent="320" name="jobId">
-      <AutoIncrement>1</AutoIncrement>
+    <column id="358" parent="321" name="jobId">
+      <AutoIncrement>89</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="348" parent="320" name="title">
+    <column id="359" parent="321" name="title">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="349" parent="320" name="numberOfPositions">
+    <column id="360" parent="321" name="companyId">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="350" parent="320" name="level">
-      <DataType>varchar(255)|0s</DataType>
+    <column id="361" parent="321" name="jobDescription">
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="351" parent="320" name="experience">
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="362" parent="321" name="codeJob">
+      <DataType>text|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="352" parent="320" name="endDate">
-      <DataType>date|0s</DataType>
+    <column id="363" parent="321" name="wageEnd">
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <index id="353" parent="320" name="PRIMARY">
+    <column id="364" parent="321" name="vacancies">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <column id="365" parent="321" name="endDate">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+    </column>
+    <column id="366" parent="321" name="categoryId">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>9</Position>
+    </column>
+    <column id="367" parent="321" name="wageStart">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+    </column>
+    <column id="368" parent="321" name="status">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>11</Position>
+    </column>
+    <column id="369" parent="321" name="statusTime">
+      <DataType>int|0s</DataType>
+      <Position>12</Position>
+    </column>
+    <column id="370" parent="321" name="applicants">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>13</Position>
+    </column>
+    <column id="371" parent="321" name="addressWork">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>14</Position>
+    </column>
+    <column id="372" parent="321" name="experience">
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>15</Position>
+    </column>
+    <index id="373" parent="321" name="PRIMARY">
       <ColNames>jobId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="354" parent="320" name="PRIMARY">
+    <key id="374" parent="321" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="355" parent="321" name="job_categoryId">
+    <column id="375" parent="322" name="job_categoryId">
       <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="356" parent="321" name="jobId">
+    <column id="376" parent="322" name="jobId">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="357" parent="321" name="categoryId">
+    <column id="377" parent="322" name="categoryId">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <index id="358" parent="321" name="PRIMARY">
+    <index id="378" parent="322" name="PRIMARY">
       <ColNames>job_categoryId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="359" parent="321" name="PRIMARY">
+    <key id="379" parent="322" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="360" parent="322" name="username">
+    <column id="380" parent="323" name="password">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="361" parent="322" name="password">
-      <DataType>varchar(255)|0s</DataType>
+    <column id="381" parent="323" name="userId">
+      <AutoIncrement>68</AutoIncrement>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="362" parent="322" name="userId">
-      <AutoIncrement>1</AutoIncrement>
-      <DataType>int|0s</DataType>
+    <column id="382" parent="323" name="email">
+      <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="363" parent="322" name="email">
+    <column id="383" parent="323" name="phone">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="364" parent="322" name="phone">
+    <column id="384" parent="323" name="name">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <index id="365" parent="322" name="PRIMARY">
+    <index id="385" parent="323" name="PRIMARY">
       <ColNames>userId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="366" parent="322" name="PRIMARY">
+    <key id="386" parent="323" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="367" parent="323" name="user_companyId">
+    <column id="387" parent="324" name="user_companyId">
       <AutoIncrement>1</AutoIncrement>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="368" parent="323" name="userId">
+    <column id="388" parent="324" name="userId">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="369" parent="323" name="companyId">
+    <column id="389" parent="324" name="companyId">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <index id="370" parent="323" name="PRIMARY">
+    <index id="390" parent="324" name="PRIMARY">
       <ColNames>user_companyId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="371" parent="323" name="PRIMARY">
+    <key id="391" parent="324" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

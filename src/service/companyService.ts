@@ -21,7 +21,7 @@ class CompanyService {
             let comparePassword = await bcrypt.compare(company.password, companyFind[0].password)
             if (!comparePassword) {
                 return {
-                    message: "Incorrect login information"
+                    message: "Password wrong!!!"
                 }
             } else {
                 let payload = {
@@ -47,6 +47,39 @@ class CompanyService {
         return await this.companyRepository.query(sql);
     }
 
+    findCompanyById = async (id) => {
+        let sql = `select *
+                   from company
+                            join city on city.cityId = company.address
+                   where companyId = ${id}`
+        return await this.companyRepository.query(sql);
+    }
+    findAll = async () => {
+        let sql = `select *
+                   from company
+                            join city on company.address = city.cityId
+                   group by companyId`
+        return await this.companyRepository.query(sql)
+    }
+
+    searchCompany = async (name) => {
+        let company = `select *
+                       from company
+                       where company.name like '%${name}%'`
+        return await this.companyRepository.query(company)
+
+    }
+    searchTopCompanies = async () => {
+        let companies = `select *, SUM(applicants) as total
+                         from company
+                                  join job j on company.companyId = j.companyId
+                                  join city on address = cityId
+                         group by j.companyId
+                         order by total desc limit 10;
+        `
+        return await this.companyRepository.query(companies)
+    }
+
     registerCompany = async (company) => {
         let companyRegister = new Company()
         companyRegister.email = company.email
@@ -62,10 +95,9 @@ class CompanyService {
         return await validate(companyRegister).then(async (errors) => {
             if (errors.length > 0) {
                 return {
-                    message : 'validation failed. errors:'
+                    message: 'validation failed. errors:'
                 }
             } else {
-                console.log('validation succeed');
                 let companyFind = await this.findCompanyByEmail(company.email)
                 if (companyFind.length !== 0) {
                     return {
@@ -81,10 +113,28 @@ class CompanyService {
             }
         });
     }
-    updateCompany = (company) => {
-        return this.companyRepository.update({companyId: company.companyId}, company)
+
+    findCompanyByIdCompany = async (id) => {
+        let sql = `select *
+                   from company
+                            join city on city.cityId = company.address
+                   where companyId = ${id}`
+        return await this.companyRepository.query(sql);
     }
 
+    updateImageCompany = async (image, id) => {
+        let sql = `update company
+                   set image = "${image}
+"                   where companyId = ${id}`
+        this.companyRepository.query(sql)
+        return await this.findCompanyByIdCompany(id)
+    }
+
+    updateCompany = async (company) => {
+        company.companyCode = `${company.abbreviatedName.substring(0, 3)}${+company.companyId - 1}${Math.floor(Math.random() * 4 + 1000)}`
+        this.companyRepository.update({companyId: company.companyId}, company)
+        return await this.findCompanyByIdCompany(company.companyId)
+    }
 }
 
 export default new CompanyService();
